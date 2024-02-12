@@ -2,10 +2,10 @@
 
 /**
  * Plugin Name:       Click 2 Threads
- * Description:       Gutenberg Plugin to display a shareable post for Meta Threads.
+ * Description:       Gutenberg Block that displays a one-click shareable post for Meta Threads.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           0.1.0
+ * Version:           1.0.0
  * Author:            Sina Eetezadi
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
