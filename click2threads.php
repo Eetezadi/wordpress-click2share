@@ -41,7 +41,7 @@ include_once(plugin_dir_path(__FILE__) . './c2t-settings.php');
 function click2threads_block_init()
 {
     // Loads block.json
-    $block_config = json_decode(wp_remote_get(__DIR__ . '/build/block.json'), true);
+    $block_config = json_decode(file_get_contents(__DIR__ . '/build/block.json'), true);
 
     // Retrieve defaults from WP settings
     $default_linklabel = get_option('c2t_default_linklabel'); // Label for share link. Default: "Share 2 Threads"
