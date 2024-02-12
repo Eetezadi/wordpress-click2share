@@ -1,4 +1,4 @@
-=== Click 2 Threads WordPress Block Plugin ===
+=== Click 2 Threads ===
 Contributors: sinaee
 Tags: threads, tweet, meta, twitter
 Requires at least: 5.0
