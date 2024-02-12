@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * Plugin Name:       Click 2 Threads
+ * Description:       Gutenberg Plugin to display a shareable post for Meta Threads.
+ * Requires at least: 6.1
+ * Requires PHP:      7.0
+ * Version:           0.1.0
+ * Author:            Sina Eetezadi
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       click2threads
+ *
+ * @package           create-block
+ */
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
+
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+
+// Set Defaults on Activation
+function c2t_set_default_options() {
+    add_option('c2t_default_linklabel', 'Share to Threads!');
+    add_option('c2t_default_username', '');
+    add_option('c2t_default_style', 'light');
+}
+register_activation_hook(__FILE__, 'c2t_set_default_options');
+
+// Plugin Settings
+// CAVE: needs "npm run build:copy-php" need to be run, in order to be copied from src to build directory (s. package.json)
+include_once(plugin_dir_path(__FILE__) . './c2t-settings.php');
+
+function click2threads_block_init()
+{
+    // Loads block.json
+    $block_config = json_decode(file_get_contents(__DIR__ . '/build/block.json'), true);
+
+    // Retrieve defaults from WP settings
+    $default_linklabel = get_option('c2t_default_linklabel'); // Label for share link. Default: "Share 2 Threads"
+    $default_username = get_option('c2t_default_username', ''); // optional: username to ba added
+    $default_style = get_option('c2t_default_style'); // optional: default style "light"
+    $defaults = array(
+        'linkLabel' => array(
+            'type' => 'string',
+            'default' => $default_linklabel,
+        ),
+        'userName' => array(
+            'type' => 'string',
+            'default' => $default_username,
+        ),
+        'defaultStyle' => array(
+            'type' => 'string',
+            'default' => $default_style,
+        ),
+
+    );
+    foreach ($defaults as $key => $value) {
+        $block_config['attributes'][$key] = $value; // Merge into attributes
+    }
+
+    // Register the block type with merged attributes.
+    register_block_type(__DIR__ . '/build', array(
+        'attributes' => $block_config['attributes'],
+    ));
+}
+add_action('init', 'click2threads_block_init');
+
+// Remove Defaults after uninstallation
+function c2t_block_uninstall() {
+    // Delete options
+    delete_option('c2t_default_linklabel');
+    delete_option('c2t_default_username');
+    delete_option('c2t_default_style');
+}
+register_uninstall_hook(__FILE__, 'c2t_block_uninstall');

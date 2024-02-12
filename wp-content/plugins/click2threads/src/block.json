@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "eetezadi/click2threads",
+	"icon": "testimonial",
+	"version": "1.0.0",
+	"title": "Click 2 Threads",
+	"category": "widgets",
+	"description": "Gutenberg Block Plugin to display a shareable post for Meta Threads.",
+	"keywords": [ "Threads", "Tweet", "click2threads" ],
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"post": {
+			"type": "string",
+			"source": "html",
+			"selector": "p",
+			"default": ""
+		},
+		"pageLink": {
+			"type": "string"
+		},
+		"userName": {
+			"type": "string"
+		},
+		"shareString": {
+			"type": "string"
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"textColor": {
+			"type": "string"
+		}
+	},
+	"styles": [
+		{
+			"name": "light",
+			"label": "Light",
+			"isDefault": true
+		},
+		{
+			"name": "dark",
+			"label": "Dark"
+		}
+	],
+	"textdomain": "click2threads",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
