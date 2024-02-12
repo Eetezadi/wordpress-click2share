@@ -1,0 +1,83 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+/* Threads Color Definitions */
+$link-color: #0095f6;
+$highlight-color: #e41e3f;
+$font-size: 1.05em;
+$logo-size: 1.2em;
+
+$light-background: #fff;
+$light-primary: #000;
+$light-secondary: #999;
+
+$dark-background: #181818;
+$dark-primary: #f3f5f7;
+$dark-secondary: #777;
+
+
+
+// Define maps for light and dark themes
+$light-theme: (
+  background-color: $light-background,
+  color: $light-primary,
+);
+
+$dark-theme: (
+  background-color: $dark-background,
+  color: $dark-primary,
+);
+
+// Mixin to apply theme properties
+@mixin apply-theme($theme-map) {
+	
+	@each $property, $value in $theme-map {
+    #{$property}: $value;
+  }
+}
+
+// Applying themes to blocks
+.wp-block-eetezadi-click2threads {
+  display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	border-radius: var(--wp--preset--spacing--20);
+  font-size: $font-size;
+  font-style: normal;
+  font-weight: 400;
+  padding: var(--wp--preset--spacing--20);
+
+
+  &.is-style-light {
+    @include apply-theme($light-theme);
+  }
+
+  &.is-style-dark {
+    @include apply-theme($dark-theme);
+  }
+}
+
+.wp-block-eetezadi-click2threads > a {
+	color: $link-color;
+	text-decoration: none;
+	align-self: flex-end;
+  
+	&::before {
+    content: "";
+    display: inline-block;
+    width: $logo-size; 
+    height: $logo-size; 
+    background-image: url('./assets/meta-threads-logo-icon.png');
+    background-size: cover;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  
+  &:hover {
+	  text-decoration: underline;
+	}
+
+}
