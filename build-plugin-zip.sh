@@ -29,7 +29,7 @@ if [ $? -eq 0 ]; then
     fi
 
     ZIPFILE="${PLUGIN_PART}-${VERSION}.zip"
-    zip -r "$ZIPFILE" *.php build/
+    zip -r "$ZIPFILE" *.php build/ readme.txt
 
     if [ $? -eq 0 ]; then
         echo "Successfully created zip file: $ZIPFILE"
