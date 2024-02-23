@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "eetezadi/click2threads",
 	"icon": "testimonial",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"title": "Click 2 Threads",
 	"category": "widgets",
 	"description": "Gutenberg Block Plugin to display a shareable post for Meta Threads.",
@@ -26,6 +26,12 @@
 			"type": "string"
 		},
 		"shareString": {
+			"type": "string"
+		},
+		"linkLabel": {
+			"type": "string"
+		},
+		"theme": {
 			"type": "string"
 		},
 		"backgroundColor": {

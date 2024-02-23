@@ -61,7 +61,8 @@ add_action('admin_init', 'c2t_register_settings');
 // Settings section callback
 function c2t_settings_section_callback()
 {
-    echo '<p>Set the default  settings for new Click 2 Threads blocks. Settings for each block can be changed in the Gutenberg sidepanel menu.</p>';
+    echo '<p>' . __('Set the default  settings for new Click 2 Threads blocks. Settings for each block can be changed in the Gutenberg sidepanel menu.', 'click2threads') . '</p>';
+
 }
 
 function c2t_default_linklabel_callback() {
@@ -128,8 +129,8 @@ function c2t_add_options_page()
 {
     add_submenu_page(
         'options-general.php',
-        'Click 2 Threads',
-        'Click 2 Threads',
+        __('Click 2 Threads', 'click2threads'),
+        __('Click 2 Threads', 'click2threads'),
         'manage_options',
         'c2t-settings',
         'c2t_options_page_html'
@@ -157,8 +158,8 @@ function c2t_options_page_html()
             ?>
         </form>
     </div>
-    <div class="c2t-footer">
-            <p>Developed by <strong>Sina Eetezadi</strong> blogging at <a href="https://fasterbikeblog.com" target="_blank">Faster Bike Blog</a>. The source code can be found on <a href="https://github.com/eetezadi/wordpress-click2threads" target="_blank">GitHub</a>.</p>
+        <div class="c2t-footer">
+            <p><?php echo __('Developed by <strong>Sina Eetezadi</strong> blogging at', 'click2threads') . ' <a href="https://fasterbikeblog.com" target="_blank">Faster Bike Blog</a>.' . __('The source code can be found on', 'click2threads') . ' <a href="https://github.com/eetezadi/wordpress-click2threads" target="_blank">GitHub</a>.'; ?></p>
         </div>
     </div>
     <style>

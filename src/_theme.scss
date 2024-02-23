@@ -1,0 +1,27 @@
+
+$font-size: 1em;
+
+/* Threads Color Definitions */
+$link-color: #0095f6;
+$highlight-color: #e41e3f;
+
+$light-background: #fff;
+$light-primary: #000;
+$light-secondary: #999;
+
+$dark-background: #181818;
+$dark-primary: #f3f5f7;
+$dark-secondary: #777;
+
+// Define maps for light and dark themes
+$light-theme: (
+	background: $light-background,
+	text: $light-primary,
+	footer-text: $light-secondary,
+);
+
+$dark-theme: (
+	background: $dark-background,
+	text: $dark-primary,
+	footer-text: $dark-secondary,
+);

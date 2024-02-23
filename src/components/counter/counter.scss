@@ -1,0 +1,13 @@
+/*
+ * SCSS definitions for the Counter component
+*/
+
+@import "../../theme";
+
+.wp-block-eetezadi-click2threads-counter {
+	font-size: 0.8em;
+
+	&.is-over {
+		color: $highlight-color;
+	}
+}

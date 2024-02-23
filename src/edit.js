@@ -1,29 +1,14 @@
 /**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
-import { __ } from '@wordpress/i18n';
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
+ * Import Wordpress Components
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import {
-	useBlockProps,
-	RichText,
-	InspectorControls,
-	PanelColorSettings,
-} from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 
-import {
-	TextControl,
-	PanelBody,
-	PanelRow,
-	ExternalLink,
-} from '@wordpress/components';
+// Custom Components
+import Sidebar from './components/sidebar/sidebar';
+import ContentEditor from './components/contenteditor/contenteditor';
+import Counter from './components/counter/counter';
+import Sharelink from './components/sharelink/sharelink';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -39,170 +24,102 @@ import './editor.scss';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
- * @return {Element} Element to render.
+ * @param {Object} attributes - Attributes of the block from block.json or PHP (_default)
+ * @param {string} attributes.post - Text of the Threads post
+ * @param {string} attributes.pageLink - Link to be shared on Threads. Set in sidepanel or default
+ * @param {string} attributes.linkLabel - Label of the link to be shared. Set in sidepanel or default
+ * @param {string} attributes.userName - Threads username get added as "via @username". Set in sidepanel or default
+ * @param {string} attributes.shareString - String ready to be shared to the Threads API
+ * @param {string} attributes.theme - Theme string, either "light" or "dark". Set in sidepanel or default
+ * @param {string} attributes.backgroundColor - Background color attribute set in sidepanel
+ * @param {string} attributes.textColor - Text color attribute set in sidepanel
+ * @param {Function} setAttributes - Function to set attributes.
+ * @return {JSX.Element} Elements to render
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const blockProps = useBlockProps();
+	/*
+	 * Hydrates the attributes with default values from settings
+	 * Value default_Username (from PHP) => userName (block.json)
+	 *
+	 */
+	Object.keys( attributes ).forEach( ( key ) => {
+		if ( key.startsWith( 'default_' ) ) {
+			const attributeKey = key.replace( 'default_', '' );
+			// Ensure attributeKey is not already set or is empty
+			if (
+				! attributes[ attributeKey ] ||
+				attributes[ attributeKey ] === ''
+			) {
+				setAttributes( { [ attributeKey ]: attributes[ key ] } );
+			}
+		}
+	} );
 
-	// Initialize attributes
+	// Initialize all attributes
 	const {
 		post,
 		pageLink,
 		linkLabel,
 		userName,
 		shareString,
-		defaultStyle,
+		theme,
 		backgroundColor,
 		textColor,
-		className,
 	} = attributes;
 
-	// Initialize sharedString
-	const updateShareString = ( newPost, newPageLink, newUserName ) => {
-		newPageLink = newPageLink ? ' ' + newPageLink : '';
-		newUserName = userName ? ' by @' + userName : '';
-
-		const encodedText = encodeURIComponent(
-			newPost + newPageLink + newUserName
-		);
-		const newShareString =
-			'https://threads.net/intent/post?text=' + encodedText;
-
-		setAttributes( { shareString: newShareString } );
-	};
-	updateShareString( post, pageLink ); // set default
-
-	// Change functions
-	const onChangePost = ( newPost ) => {
-		setAttributes( { post: newPost } );
-		updateShareString( newPost, pageLink );
-	};
-
-	const onChangePageLink = ( newPageLink ) => {
-		setAttributes( { pageLink: newPageLink } );
-	};
-	const onChangeLinkLabel = ( newLinkLabel ) => {
-		setAttributes( {
-			linkLabel: newLinkLabel,
-		} );
-	};
-	const onChangeUserName = ( newUserName ) => {
-		setAttributes( { userName: newUserName } );
-	};
-
-	const onChangeBackgroundColor = ( newBackgroundColor ) => {
-		setAttributes( { backgroundColor: newBackgroundColor } );
-	};
-	const onChangeTextColor = ( newTextColor ) => {
-		setAttributes( { textColor: newTextColor } );
-	};
-	const onChangeClassName = ( newClassName ) => {
-		setAttributes( { className: newClassName } );
-	};
-
-	// Initialize pageLink
+	// Initialize pageLink if not defined on block init
 	if ( pageLink === undefined ) {
 		const { select } = wp.data;
 		const defaultPageLink = select( 'core/editor' ).getCurrentPost().link;
-		onChangePageLink( defaultPageLink );
+		setAttributes( { pageLink: defaultPageLink } );
 	}
 
-	// Initialize className
-	if ( className === undefined ) {
-		const defaultClassName = 'is-style-' + defaultStyle;
-		onChangeClassName( defaultClassName );
+	// Set BlockProps
+	const blockProps = useBlockProps( {
+		style: { backgroundColor },
+	} );
+
+	/**
+	 * Initialize className from Styles
+	 * Somewhat of a hack can be be probably solved better:
+	 * The "styles" in the block.json adds class "is-style-xxx" to the block internally, but not in blockProps
+	 * On block init "className" is undefined, so it gets filled with theme (from WP settings default_theme via PHP)
+	 * Then this somehow gets properly added to the list of classes of the block
+	 *
+	 * @param {string} blockProps.classname - all classes supplied to the block
+	 * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/
+	 */
+	if ( ! blockProps.className.includes( 'is-style' ) && theme ) {
+		const defaultClassName = 'is-style-' + theme;
+		setAttributes( { className: defaultClassName } );
 	}
 
 	return (
-		<div
-			{ ...blockProps }
-			style={ {
-				backgroundColor: backgroundColor,
-			} }
-		>
-			<InspectorControls>
-				<PanelBody
-					title={ __( 'Link Settings', 'click2threads' ) }
-					initialOpen={ true }
-				>
-					<PanelRow>
-						<fieldset>
-							<TextControl
-								label={ __( 'Link label', 'click2threads' ) }
-								value={ linkLabel }
-								onChange={ onChangeLinkLabel }
-								help={ __(
-									'Caption of the share link.',
-									'click2threads'
-								) }
-							/>
-						</fieldset>
-					</PanelRow>
-
-					<PanelRow>
-						<fieldset>
-							<TextControl
-								label={ __( 'Shared Link', 'click2threads' ) }
-								value={ pageLink }
-								onChange={ onChangePageLink }
-								help={ __(
-									'Optional: Link to be shared (default: post url)',
-									'click2threads'
-								) }
-							/>
-						</fieldset>
-					</PanelRow>
-
-					<PanelRow>
-						<fieldset>
-							<TextControl
-								label={ __( 'Threads User', 'click2threads' ) }
-								value={ userName }
-								onChange={ onChangeUserName }
-								help={ __(
-									'Optional: Adds "by @username" to the post',
-									'click2threads'
-								) }
-							/>
-						</fieldset>
-					</PanelRow>
-				</PanelBody>
-				<PanelBody
-					title={ __( 'Custom Colors', 'click2threads' ) }
-					initialOpen={ false }
-				>
-					<PanelColorSettings
-						title={ __( 'Color settings', 'click2threads' ) }
-						initialOpen={ true }
-						colorSettings={ [
-							{
-								value: textColor,
-								onChange: onChangeTextColor,
-								label: __( 'Text color', 'click2threads' ),
-							},
-							{
-								value: backgroundColor,
-								onChange: onChangeBackgroundColor,
-								label: __(
-									'Background color',
-									'click2threads'
-								),
-							},
-						] }
-					/>
-				</PanelBody>
-			</InspectorControls>
-			<RichText
-				tagName="p"
-				onChange={ onChangePost }
-				value={ post }
-				allowedFormats={ [] }
-				placeholder={ __( 'Write your Threads post...' ) }
-				style={ {
-					color: textColor,
-				} }
-			/>
-			<ExternalLink href={ shareString }>{ linkLabel }</ExternalLink>
+		<div { ...blockProps }>
+			<Sidebar
+				linkLabel={ linkLabel }
+				pageLink={ pageLink }
+				userName={ userName }
+				textColor={ textColor }
+				backgroundColor={ backgroundColor }
+				setAttributes={ setAttributes }
+			></Sidebar>
+			<ContentEditor
+				post={ post }
+				textColor={ textColor }
+				setAttributes={ setAttributes }
+			></ContentEditor>
+			<div className="wp-block-eetezadi-click2threads-footer">
+				<Counter shareURL={ shareString }></Counter>
+				<Sharelink
+					post={ post }
+					link={ pageLink }
+					userName={ userName }
+					linkLabel={ linkLabel }
+					shareString={ shareString }
+					setAttributes={ setAttributes }
+				></Sharelink>
+			</div>
 		</div>
 	);
 }

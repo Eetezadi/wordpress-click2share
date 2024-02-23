@@ -13,6 +13,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
  *
+ * @param {Object} attributes - Attributes of the block. See edit.js and block.json
  * @return {Element} Element to render.
  */
 export default function save( { attributes } ) {
@@ -25,13 +26,14 @@ export default function save( { attributes } ) {
 		className,
 	} = attributes;
 
+	// className somewhat of a hack to get the "styles" (s. Edit.js)
+	const blockProps = useBlockProps.save( {
+		className: `${ className } wp-c2t-block-wrapper`,
+		style: { backgroundColor },
+	} );
+
 	return (
-		<div
-			className={ `${ className } wp-c2t-block-wrapper` }
-			style={ {
-				backgroundColor: backgroundColor,
-			} }
-		>
+		<div { ...blockProps }>
 			<RichText.Content
 				tagName="p"
 				value={ post }
@@ -40,13 +42,13 @@ export default function save( { attributes } ) {
 					color: textColor,
 				} }
 			/>
-			<div class="wp-c2t-block-footer">
-				<span class="wp-c2t-block-icon"></span>
+			<div className="wp-c2t-block-footer">
+				<span className="wp-c2t-block-icon"></span>
 				<a
-					class="wp-c2t-block-link"
+					className="wp-c2t-block-link"
 					href={ shareString }
 					target="_blank"
-					rel="noopener"
+					rel="noreferrer noopener"
 				>
 					{ linkLabel }
 				</a>
