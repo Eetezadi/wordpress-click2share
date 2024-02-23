@@ -1,0 +1,24 @@
+
+@import "../../theme";
+
+// External Link
+.wp-block-eetezadi-click2threads-sharelink {
+	color: $link-color;
+	text-decoration: none;
+	margin-left: auto;
+
+	&::before {
+		content: "";
+		display: inline-block;
+		width: $font-size;
+		height: $font-size;
+		background-image: url(../../assets/meta-threads-logo-icon.png);
+		background-size: cover;
+		margin-right: 8px;
+		vertical-align: middle;
+	}
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
