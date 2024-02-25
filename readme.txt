@@ -4,7 +4,7 @@ Tags: threads, tweet, meta, twitter
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 6.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPL-2.0-or-later
 
 Gutenberg Block that displays a one-click shareable post for Meta Threads.
