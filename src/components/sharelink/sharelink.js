@@ -24,6 +24,7 @@ export default function Sharelink( {
 	setAttributes,
 } ) {
 	// Text styling
+	post = post.trim();
 	link = link ? ' ' + link : '';
 	userName = userName ? ' by @' + userName : '';
 

@@ -5,11 +5,11 @@
  * Description:       Gutenberg Block that displays a one-click shareable post for Meta Threads.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            Sina Eetezadi
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       click2threads
+ * Text Domain:       click-2-threads
  *
  * @package           create-block
  */

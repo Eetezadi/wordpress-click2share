@@ -28,6 +28,7 @@ $editor-font-size: $font-size * 1.05;
 	font-style: normal;
 	font-weight: 400;
 	padding: var(--wp--preset--spacing--20);
+	border: 1px solid #d3d3d3;
 
 
 	&.is-style-light {
