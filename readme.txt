@@ -28,9 +28,13 @@ The **Click 2 Threads** plugin is a simple, one-click shareable block for the Gu
 
 == Frequently Asked Questions ==
 
-= Can I customize the appearance of the Click 2 Threads block? =
+= Why use this plugin? =
 
-Yes, the plugin offers dark and light base styles (inspired by Meta Threads), background, and text color. Further customization is possible using CSS; all elements have unique classes. You can also set a default username (added as "by @username") and change the link.
+Join the wave with Meta Threads, set to outpace Twitter/X. Our plugin simplifies content sharing to boost your Meta Threads presence. Make it easy for visitors to share, and watch your visibility soar.
+
+= Can I customize the Click 2 Threads block? =
+
+Select from dark or light themes inspited by Threads, adjust background and text colors, and use CSS for deeper customization. You can set deault settings to make new block creation quick.
 
 = Is Click 2 Threads compatible with all WordPress themes? =
 
@@ -38,18 +42,23 @@ While designed for WordPress 5.0 and higher, it should work with any theme that 
 
 = How can I get support or report an issue? =
 
-For support or to report an issue, visit the [GitHub repository](https://github.com/eetezadi/wordpress-click2threads) or contact me directly at code@eetezadi.com.
+For support or to report an issue, visit the [GitHub repository](https://github.com/eetezadi/wordpress-click2threads) or contact me at code@eetezadi.com.
 
 == Screenshots ==
 
-1. This screenshot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif).
-2. This is the second screenshot.
+1. Editor view with sideplanel and different color options.
+1. Click 2 Threads plugin with custom CSS as found on www.fasterbikeblog.com
+1. Overview of settings page with default settings.
 
 == Changelog ==
 
+= 1.1.1 =
+* Fix: slight border in editor for white background themes
+* Fix: Readme, screenshots, logo and slug
+
 = 1.1.0 =
 * New Feature: Shows remaing letters on message editor
-* Fixes: Various under the hood improvements and bug fixes
+* Fixes: Various improvements in code structure, code documentation, JS linting and bug fixes
 
 = 1.0.0 =
 * Initial Release.
