@@ -2,7 +2,7 @@
 
 The **Click 2 Threads** plugin is a simple, one-click shareable block for the Gutenberg editor, making it effortless for blog visitors to share your content on the Meta Threads platform.
 
-![Click 2 Threads](Screenshot_Click2Threads.png "Click 2 Threads Screenshot")
+![Click 2 Threads](src/assets/screenshot-1.png "Click 2 Threads Screenshot")
 
 
 ### Key Features
