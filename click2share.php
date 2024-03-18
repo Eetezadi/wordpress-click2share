@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Plugin Name:       Click 2 Threads
- * Description:       Gutenberg Block that displays a one-click shareable post for Meta Threads.
+ * Plugin Name:       Click 2 Share
+ * Description:       Gutenberg Block that displays a one-click shareable post for Social Media like Meta Threads.
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            Sina Eetezadi
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       click-2-threads
+ * Text Domain:       click-2-share
  *
  * @package           create-block
  */
@@ -38,14 +38,14 @@ register_activation_hook(__FILE__, 'c2t_set_default_options');
 // CAVE: needs "npm run build:copy-php" need to be run, in order to be copied from src to build directory (s. package.json)
 include_once(plugin_dir_path(__FILE__) . './c2t-settings.php');
 
-function click2threads_block_init()
+function click2share_block_init()
 {
     // Loads block.json
     $block_config = json_decode(file_get_contents(__DIR__ . '/build/block.json'), true);
 
     // Retrieve defaults from WP settings
     $default_linklabel = get_option('c2t_default_linklabel'); // Label for share link. Default: "Share 2 Threads"
-    $default_username = get_option('c2t_default_username', ''); // optional: username to ba added
+    $default_username = get_option('c2t_default_username', ''); // optional: username to be added
     $default_style = get_option('c2t_default_style'); // optional: default style "light"
     $defaults = array(
         'default_linkLabel' => array(
@@ -71,7 +71,7 @@ function click2threads_block_init()
         'attributes' => $block_config['attributes'],
     ));
 }
-add_action('init', 'click2threads_block_init');
+add_action('init', 'click2share_block_init');
 
 // Remove Defaults after uninstallation
 function c2t_block_uninstall() {

@@ -16,7 +16,7 @@ export default function Counter( { shareURL } ) {
 		: ''; // shareString not initialized on first call
 	const remainingChars = maxChars - countString.length;
 
-	const defaulClass = 'wp-block-eetezadi-click2threads-counter';
+	const defaulClass = 'wp-block-eetezadi-click2share-counter';
 	const highlightClass = remainingChars < 0 ? ' is-over' : ''; // add highlight
 
 	return (

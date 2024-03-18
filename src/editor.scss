@@ -13,13 +13,13 @@ $editor-font-size: $font-size * 1.05;
 	background-color: map.get($theme, background);
 	color: map.get($theme, text);
 
-	.wp-block-eetezadi-click2threads-footer {
+	.wp-block-eetezadi-click2share-footer {
 		color: map.get($theme, footer-text);
 	}
 }
 
 // Applying themes to blocks
-.wp-block-eetezadi-click2threads {
+.wp-block-eetezadi-click2share {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -43,7 +43,7 @@ $editor-font-size: $font-size * 1.05;
 }
 
 // Footer Line
-.wp-block-eetezadi-click2threads-footer {
+.wp-block-eetezadi-click2share-footer {
 	align-self: flex-end;
 	display: flex;
 	justify-content: space-between;
