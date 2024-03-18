@@ -47,18 +47,18 @@ export default function Sidebar( {
 	return (
 		<InspectorControls>
 			<PanelBody
-				title={ __( 'Link Settings', 'click2threads' ) }
+				title={ __( 'Link Settings', 'click2share' ) }
 				initialOpen={ true }
 			>
 				<PanelRow>
 					<fieldset>
 						<TextControl
-							label={ __( 'Link label', 'click2threads' ) }
+							label={ __( 'Link label', 'click2share' ) }
 							value={ linkLabel }
 							onChange={ onChangeLinkLabel }
 							help={ __(
 								'Caption of the share link.',
-								'click2threads'
+								'click2share'
 							) }
 						/>
 					</fieldset>
@@ -67,12 +67,12 @@ export default function Sidebar( {
 				<PanelRow>
 					<fieldset>
 						<TextControl
-							label={ __( 'Shared Link', 'click2threads' ) }
+							label={ __( 'Shared Link', 'click2share' ) }
 							value={ pageLink }
 							onChange={ onChangePageLink }
 							help={ __(
 								'Optional: Link to be shared (default: post url)',
-								'click2threads'
+								'click2share'
 							) }
 						/>
 					</fieldset>
@@ -81,34 +81,34 @@ export default function Sidebar( {
 				<PanelRow>
 					<fieldset>
 						<TextControl
-							label={ __( 'Threads User', 'click2threads' ) }
+							label={ __( 'Threads User', 'click2share' ) }
 							value={ userName }
 							onChange={ onChangeUserName }
 							help={ __(
 								'Optional: Adds "by @username" to the post',
-								'click2threads'
+								'click2share'
 							) }
 						/>
 					</fieldset>
 				</PanelRow>
 			</PanelBody>
 			<PanelBody
-				title={ __( 'Custom Colors', 'click2threads' ) }
+				title={ __( 'Custom Colors', 'click2share' ) }
 				initialOpen={ false }
 			>
 				<PanelColorSettings
-					title={ __( 'Color settings', 'click2threads' ) }
+					title={ __( 'Color settings', 'click2share' ) }
 					initialOpen={ true }
 					colorSettings={ [
 						{
 							value: textColor,
 							onChange: onChangeTextColor,
-							label: __( 'Text color', 'click2threads' ),
+							label: __( 'Text color', 'click2share' ),
 						},
 						{
 							value: backgroundColor,
 							onChange: onChangeBackgroundColor,
-							label: __( 'Background color', 'click2threads' ),
+							label: __( 'Background color', 'click2share' ),
 						},
 					] }
 				/>

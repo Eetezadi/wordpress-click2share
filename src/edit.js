@@ -109,7 +109,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				textColor={ textColor }
 				setAttributes={ setAttributes }
 			></ContentEditor>
-			<div className="wp-block-eetezadi-click2threads-footer">
+			<div className="wp-block-eetezadi-click2share-footer">
 				<Counter shareURL={ shareString }></Counter>
 				<Sharelink
 					post={ post }

@@ -36,7 +36,7 @@ export default function Sharelink( {
 
 	return (
 		<ExternalLink
-			className="wp-block-eetezadi-click2threads-sharelink"
+			className="wp-block-eetezadi-click2share-sharelink"
 			href={ shareString }
 		>
 			{ linkLabel }

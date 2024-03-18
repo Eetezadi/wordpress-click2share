@@ -1,13 +1,13 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "eetezadi/click2threads",
+	"name": "eetezadi/click2share",
 	"icon": "testimonial",
-	"version": "1.1.1",
-	"title": "Click 2 Threads",
+	"version": "1.1.2",
+	"title": "Click 2 Share",
 	"category": "widgets",
-	"description": "Gutenberg Block Plugin to display a shareable post for Meta Threads.",
-	"keywords": [ "Threads", "Tweet", "click2threads" ],
+	"description": "Gutenberg Block Plugin to display a shareable post on Social Media like Meta Threads.",
+	"keywords": [ "Threads", "Tweet", "click2share", "social media" ],
 	"example": {},
 	"supports": {
 		"html": false
@@ -52,7 +52,7 @@
 			"label": "Dark"
 		}
 	],
-	"textdomain": "click2threads",
+	"textdomain": "click2share",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"

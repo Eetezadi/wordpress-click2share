@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Click 2 Threads Plugin Settings Page
+ * Click 2 Share Plugin Settings Page
  *
  * Implements settings page using WordPress Settings API. It includes:
  * - Default Threads Username: Validates and stores a username.
  * - Default Style: Allows selection between 'light' and 'dark' themes.
  *
- * @package Click2Threads
+ * @package Click2Share
  */
 
 // Prevent direct access to the file
@@ -26,7 +26,7 @@ function c2t_register_settings()
     // Add settings section
     add_settings_section(
         'c2t_settings_section',
-        __('Click 2 Threads Default Settings', 'click2threads'),
+        __('Click 2 Share Default Settings', 'click2share'),
         'c2t_settings_section_callback',
         'c2t'
     );
@@ -34,7 +34,7 @@ function c2t_register_settings()
     // Add settings fields
     add_settings_field(
         'c2t_default_linklabel',
-        __('Default Share Label', 'click2threads'),
+        __('Default Share Label', 'click2share'),
         'c2t_default_linklabel_callback',
         'c2t',
         'c2t_settings_section'
@@ -42,7 +42,7 @@ function c2t_register_settings()
     
     add_settings_field(
         'c2t_default_username',
-        __('Default Threads Username', 'click2threads'),
+        __('Default Threads Username', 'click2share'),
         'c2t_default_username_callback',
         'c2t',
         'c2t_settings_section'
@@ -50,7 +50,7 @@ function c2t_register_settings()
 
     add_settings_field(
         'c2t_default_style',
-        __('Default Theme', 'click2threads'),
+        __('Default Theme', 'click2share'),
         'c2t_default_style_callback',
         'c2t',
         'c2t_settings_section'
@@ -61,20 +61,20 @@ add_action('admin_init', 'c2t_register_settings');
 // Settings section callback
 function c2t_settings_section_callback()
 {
-    echo '<p>' . __('Set the default  settings for new Click 2 Threads blocks. Settings for each block can be changed in the Gutenberg sidepanel menu.', 'click2threads') . '</p>';
+    echo '<p>' . __('Set the default  settings for new Click 2 Share blocks. Settings for each block can be changed in the Gutenberg sidepanel menu.', 'click2share') . '</p>';
 
 }
 
 function c2t_default_linklabel_callback() {
     $linklabel = get_option('c2t_default_linklabel');
     echo '<input type="text" id="c2t_default_linklabel" name="c2t_default_linklabel" value="' . esc_attr($linklabel) . '"/>';
-    echo '<p class="description">' . __('Enter the default caption for the share label', 'click2threads') . '</p>';
+    echo '<p class="description">' . __('Enter the default caption for the share label', 'click2share') . '</p>';
 }
 
 function c2t_default_username_callback() {
     $username = get_option('c2t_default_username');
     echo '<input type="text" id="c2t_default_username" name="c2t_default_username" value="' . esc_attr($username) . '"/>';
-    echo '<p class="description">' . __('Enter the default Threads username for new blocks (without @).', 'click2threads') . '</p>';
+    echo '<p class="description">' . __('Enter the default Threads username for new blocks (without @).', 'click2share') . '</p>';
 }
 
 
@@ -85,7 +85,7 @@ function c2t_default_style_callback()
             <option value="light"' . selected($style, 'light', false) . '>Light</option>
             <option value="dark"' . selected($style, 'dark', false) . '>Dark</option>
           </select>';
-    echo '<p class="description">' . __('Choose between Light and Dark theme.<br> For further CSS customization the main &lt;div&gt; of the block has the class "wp-block-eetezadi-click2threads".', 'click2threads') . '</p>';
+    echo '<p class="description">' . __('Choose between Light and Dark theme.<br> For further CSS customization the main &lt;div&gt; of the block has the class "wp-block-eetezadi-click2share".', 'click2share') . '</p>';
 }
 
 function c2t_validate_linklabel($input)
@@ -98,7 +98,7 @@ function c2t_validate_linklabel($input)
         add_settings_error(
             'c2t_default_linklabel',
             'c2t_default_linklabel_error',
-            __('Invalid Share Label: 1-80 characters', 'click2threads'),
+            __('Invalid Share Label: 1-80 characters', 'click2share'),
             'error'
         );
         $input = substr($input, 0, $maxchar);
@@ -116,7 +116,7 @@ function c2t_validate_username($input)
         add_settings_error(
             'c2t_default_username',
             'c2t_default_username_error',
-            __('Invalid Threads Username: 1-30 characters, only letters, numbers, periods, and underscores', 'click2threads'),
+            __('Invalid Threads Username: 1-30 characters, only letters, numbers, periods, and underscores', 'click2share'),
             'error'
         );
         //return get_option('c2t_default_username');
@@ -129,8 +129,8 @@ function c2t_add_options_page()
 {
     add_submenu_page(
         'options-general.php',
-        __('Click 2 Threads', 'click2threads'),
-        __('Click 2 Threads', 'click2threads'),
+        __('Click 2 Share', 'click2share'),
+        __('Click 2 Share', 'click2share'),
         'manage_options',
         'c2t-settings',
         'c2t_options_page_html'
@@ -159,7 +159,7 @@ function c2t_options_page_html()
         </form>
     </div>
         <div class="c2t-footer">
-            <p><?php echo __('Developed by <strong>Sina Eetezadi</strong> blogging at', 'click2threads') . ' <a href="https://fasterbikeblog.com" target="_blank">Faster Bike Blog</a>.' . __('The source code can be found on', 'click2threads') . ' <a href="https://github.com/eetezadi/wordpress-click2threads" target="_blank">GitHub</a>.'; ?></p>
+            <p><?php echo __('Developed by <strong>Sina Eetezadi</strong> blogging at', 'click2share') . ' <a href="https://fasterbikeblog.com" target="_blank">Faster Bike Blog</a>.' . __('The source code can be found on', 'click2share') . ' <a href="https://github.com/eetezadi/wordpress-click2share" target="_blank">GitHub</a>.'; ?></p>
         </div>
     </div>
     <style>
