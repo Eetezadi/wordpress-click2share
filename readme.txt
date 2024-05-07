@@ -3,8 +3,8 @@ Contributors: sinaee
 Tags: threads, tweet, meta, twitter
 Requires at least: 5.0
 Requires PHP: 7.0
-Tested up to: 6.4
-Stable tag: 1.1.2
+Tested up to: 6.5
+Stable tag: 1.1.3
 License: GPL-2.0-or-later
 
 Gutenberg Block that displays a one-click shareable post for Social Media like Meta Threads.
@@ -25,6 +25,8 @@ The **Click 2 Share** plugin is a simple, one-click shareable block for the Gute
 1. **Install**: Access your WordPress dashboard, navigate to Plugins > Add New, and search for "Click 2 Share." Click "Install Now." Activate the plugin to start integrating shareable content blocks into your posts.
 1. **Configure**: You can set default settings in the "Click 2 Share" settings page for new blocks.
 1. **Use**: In the Gutenberg editor, add a "Click 2 Share" block to your post, adjusting the base style, username, and default share text in the block settings for each block.
+
+Alternatively, you can also build from source from the [GitHub repository](https://github.com/eetezadi/wordpress-click2share).
 
 == Frequently Asked Questions ==
 
@@ -60,6 +62,9 @@ For support or to report an issue, visit the [GitHub repository](https://github.
 1. Overview of settings page with default settings.
 
 == Changelog ==
+
+= 1.1.3 =
+* Small fixes based on Wordpress initial code review
 
 = 1.1.2 =
 * Rename to "Click 2 Share" because of Wordpress directory trademark rules 

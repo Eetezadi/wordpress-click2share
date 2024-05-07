@@ -28,7 +28,7 @@ export default function save( { attributes } ) {
 
 	// className somewhat of a hack to get the "styles" (s. Edit.js)
 	const blockProps = useBlockProps.save( {
-		className: `${ className } wp-c2t-block-wrapper`,
+		className: `${ className } wp-c2sh-block-wrapper`,
 		style: { backgroundColor },
 	} );
 
@@ -37,15 +37,15 @@ export default function save( { attributes } ) {
 			<RichText.Content
 				tagName="p"
 				value={ post }
-				class="wp-c2t-block-post"
+				class="wp-c2sh-block-post"
 				style={ {
 					color: textColor,
 				} }
 			/>
-			<div className="wp-c2t-block-footer">
-				<span className="wp-c2t-block-icon"></span>
+			<div className="wp-c2sh-block-footer">
+				<span className="wp-c2sh-block-icon"></span>
 				<a
-					className="wp-c2t-block-link"
+					className="wp-c2sh-block-link"
 					href={ shareString }
 					target="_blank"
 					rel="noreferrer noopener"

@@ -20,7 +20,7 @@ import './style.scss';
 import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
-import { c2ticon } from './assets/icon';
+import { c2shicon } from './assets/icon';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -28,7 +28,7 @@ import { c2ticon } from './assets/icon';
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 registerBlockType( metadata.name, {
-	icon: c2ticon, // custom icon.js
+	icon: c2shicon, // custom icon.js
 	edit: Edit, // edit.js
 	save, // save.js
 } );
