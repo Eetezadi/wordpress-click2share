@@ -13,14 +13,14 @@ $display-font-size: $font-size * 1.2;
 	background-color: map.get($theme, background);
 	color: map.get($theme, text);
 
-	.wp-c2t-block-footer {
+	.wp-c2sh-block-footer {
 		color: map.get($theme, footer-text);
 		align-self: flex-end;
 	}
 }
 
 // Applying themes to blocks
-.wp-c2t-block-wrapper {
+.wp-c2sh-block-wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -44,7 +44,7 @@ $display-font-size: $font-size * 1.2;
 	}
 }
 
-.wp-c2t-block-icon {
+.wp-c2sh-block-icon {
 	content: "";
 	display: inline-block;
 	width: $display-font-size;
@@ -55,7 +55,7 @@ $display-font-size: $font-size * 1.2;
 	vertical-align: middle;
 }
 
-.wp-c2t-block-link {
+.wp-c2sh-block-link {
 	color: $link-color;
 	text-decoration: none;
 

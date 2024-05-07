@@ -3,9 +3,9 @@
 /**
  * Plugin Name:       Click 2 Share
  * Description:       Gutenberg Block that displays a one-click shareable post for Social Media like Meta Threads.
- * Requires at least: 6.1
+ * Requires at least: 6.1 
  * Requires PHP:      7.0
- * Version:           1.1.2
+ * Version:           1.1.3
  * Author:            Sina Eetezadi
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -27,16 +27,16 @@ if (!defined('ABSPATH')) {
  */
 
 // Set Defaults on Activation
-function c2t_set_default_options() {
-    add_option('c2t_default_linklabel', 'Share to Threads!');
-    add_option('c2t_default_username', '');
-    add_option('c2t_default_style', 'light');
+function c2sh_set_default_options() {
+    add_option('c2sh_default_linklabel', 'Share to Threads!');
+    add_option('c2sh_default_username', '');
+    add_option('c2sh_default_style', 'light');
 }
-register_activation_hook(__FILE__, 'c2t_set_default_options');
+register_activation_hook(__FILE__, 'c2sh_set_default_options');
 
 // Plugin Settings
 // CAVE: needs "npm run build:copy-php" need to be run, in order to be copied from src to build directory (s. package.json)
-include_once(plugin_dir_path(__FILE__) . './c2t-settings.php');
+include_once(plugin_dir_path(__FILE__) . './c2sh-settings.php');
 
 function click2share_block_init()
 {
@@ -44,9 +44,9 @@ function click2share_block_init()
     $block_config = json_decode(file_get_contents(__DIR__ . '/build/block.json'), true);
 
     // Retrieve defaults from WP settings
-    $default_linklabel = get_option('c2t_default_linklabel'); // Label for share link. Default: "Share 2 Threads"
-    $default_username = get_option('c2t_default_username', ''); // optional: username to be added
-    $default_style = get_option('c2t_default_style'); // optional: default style "light"
+    $default_linklabel = get_option('c2sh_default_linklabel'); // Label for share link. Default: "Share 2 Threads"
+    $default_username = get_option('c2sh_default_username', ''); // optional: username to be added
+    $default_style = get_option('c2sh_default_style'); // optional: default style "light"
     $defaults = array(
         'default_linkLabel' => array(
             'type' => 'string',
@@ -74,10 +74,10 @@ function click2share_block_init()
 add_action('init', 'click2share_block_init');
 
 // Remove Defaults after uninstallation
-function c2t_block_uninstall() {
+function c2sh_block_uninstall() {
     // Delete options
-    delete_option('c2t_default_linklabel');
-    delete_option('c2t_default_username');
-    delete_option('c2t_default_style');
+    delete_option('c2sh_default_linklabel');
+    delete_option('c2sh_default_username');
+    delete_option('c2sh_default_style');
 }
-register_uninstall_hook(__FILE__, 'c2t_block_uninstall');
+register_uninstall_hook(__FILE__, 'c2sh_block_uninstall');
