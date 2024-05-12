@@ -28,7 +28,7 @@ if [ $? -eq 0 ]; then
         VERSION="1.0.0"
     fi
 
-    ZIPFILE="${PLUGIN_PART}-${VERSION}.zip"
+    ZIPFILE="build/${PLUGIN_PART}-${VERSION}.zip"
     zip -r "$ZIPFILE" *.php build/ readme.txt
 
     if [ $? -eq 0 ]; then
