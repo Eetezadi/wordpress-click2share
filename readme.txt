@@ -4,7 +4,7 @@ Tags: threads, tweet, meta, twitter
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 6.5
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPL-2.0-or-later
 
 Gutenberg Block that displays a one-click shareable post for Social Media like Meta Threads.
@@ -12,11 +12,12 @@ Gutenberg Block that displays a one-click shareable post for Social Media like M
 == Description ==
 
 The **Click 2 Share** plugin is a simple, one-click shareable block for the Gutenberg editor, making it effortless for blog visitors to share your content on Social media platform such as Meta Threads.
+This call to action in your blog will help you to grow your content visibility and visitor engagement.
 
 ### Key Features
 
 * **One-Click Share to Meta Threads**: Streamline the process of sharing blog posts, encouraging greater engagement and visibility on social media. (X / Twitter to follow soon)
-* **Gutenberg Block Integration**: Easily add the Click 2 Share block to any post or page using the Gutenberg editor.
+* **Gutenberg Block Integration**: Seamlessly add the Click 2 Share block to any post or page using the Gutenberg editor.
 * **Customizable Settings**: Choose between dark and light base styles, set a username for attribution, and customize the default text for the share link. Further customization with CSS is possible.
 * **Default Settings**: Set the default settings to be applied to every new block created.
 
@@ -32,8 +33,7 @@ Alternatively, you can also build from source from the [GitHub repository](https
 
 = Why use this plugin? =
 
-Join the wave with Meta Threads, set to outpace Twitter/X. This plugin simplifies content sharing to boost your Meta Threads presence. Make it easy for visitors to share, and watch your visibility soar.
-In the future support for other platforms will be added.
+Click 2 Share is designed to seamlessly integrate with your blog; this plugin enables visitors to effortlessly share your content on top social media platforms like Meta Threads with just a single click. Embed Click 2 Share into your posts and watch your content visibility and visitor engagement soar. Simple to use yet powerful in impact, Click 2 Share is an essential tool for bloggers aiming to expand their digital footprint and attract more viewers.
 
 = Which Social media platforms are supported? =
 
@@ -41,7 +41,7 @@ Currently, only Meta Threads is supported. In the future X (former Twitter) will
 
 = Can I customize the Click 2 Threads block? =
 
-Select from dark or light themes inspired by Meta Threads, adjust background and text colors, and use CSS for deeper customization. You can set deault settings to make new block creation quick.
+Select from dark or light themes inspired by Meta Threads or use CSS for deeper customization. You can set deault settings to make new block creation quick.
 
 = How can I track shares? =
 
@@ -62,6 +62,10 @@ For support or to report an issue, visit the [GitHub repository](https://github.
 1. Overview of settings page with default settings.
 
 == Changelog ==
+
+= 1.1.4 = 
+* Updates of dir structure and assets for publishing on Plugin directory.
+* Small fixes
 
 = 1.1.3 =
 * Small fixes based on Wordpress initial code review
