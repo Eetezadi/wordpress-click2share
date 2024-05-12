@@ -47,18 +47,18 @@ export default function Sidebar( {
 	return (
 		<InspectorControls>
 			<PanelBody
-				title={ __( 'Link Settings', 'click2share' ) }
+				title={ __( 'Link Settings', 'click-2-share' ) }
 				initialOpen={ true }
 			>
 				<PanelRow>
 					<fieldset>
 						<TextControl
-							label={ __( 'Link label', 'click2share' ) }
+							label={ __( 'Link label', 'click-2-share' ) }
 							value={ linkLabel }
 							onChange={ onChangeLinkLabel }
 							help={ __(
 								'Caption of the share link.',
-								'click2share'
+								'click-2-share'
 							) }
 						/>
 					</fieldset>
@@ -67,12 +67,12 @@ export default function Sidebar( {
 				<PanelRow>
 					<fieldset>
 						<TextControl
-							label={ __( 'Shared Link', 'click2share' ) }
+							label={ __( 'Shared Link', 'click-2-share' ) }
 							value={ pageLink }
 							onChange={ onChangePageLink }
 							help={ __(
 								'Optional: Link to be shared (default: post url)',
-								'click2share'
+								'click-2-share'
 							) }
 						/>
 					</fieldset>
@@ -81,38 +81,42 @@ export default function Sidebar( {
 				<PanelRow>
 					<fieldset>
 						<TextControl
-							label={ __( 'Threads User', 'click2share' ) }
+							label={ __( 'Threads User', 'click-2-share' ) }
 							value={ userName }
 							onChange={ onChangeUserName }
 							help={ __(
 								'Optional: Adds "by @username" to the post',
-								'click2share'
+								'click-2-share'
 							) }
 						/>
 					</fieldset>
 				</PanelRow>
 			</PanelBody>
+			{/*
+			
+			!!! Temporary fix until proper implementation of custom colors !!!
+			
 			<PanelBody
-				title={ __( 'Custom Colors', 'click2share' ) }
+				title={ __( 'Custom Colors', 'click-2-share' ) }
 				initialOpen={ false }
 			>
 				<PanelColorSettings
-					title={ __( 'Color settings', 'click2share' ) }
+					title={ __( 'Color settings', 'click-2-share' ) }
 					initialOpen={ true }
 					colorSettings={ [
 						{
 							value: textColor,
 							onChange: onChangeTextColor,
-							label: __( 'Text color', 'click2share' ),
+							label: __( 'Text color', 'click-2-share' ),
 						},
 						{
 							value: backgroundColor,
 							onChange: onChangeBackgroundColor,
-							label: __( 'Background color', 'click2share' ),
+							label: __( 'Background color', 'click-2-share' ),
 						},
 					] }
 				/>
-			</PanelBody>
+			</PanelBody> */}
 		</InspectorControls>
 	);
 }
