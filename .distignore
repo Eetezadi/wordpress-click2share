@@ -8,4 +8,4 @@
 .distignore
 .gitignore
 .gitpod.yml
-build-plug in-zip.sh
+build-plugin-zip.sh
