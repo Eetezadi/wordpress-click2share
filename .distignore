@@ -1,0 +1,11 @@
+/.wordpress-org
+/.build
+/.git
+/.github
+/node_modules
+
+.editorconfig
+.distignore
+.gitignore
+.gitpod.yml
+build-plug in-zip.sh
