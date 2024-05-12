@@ -1,7 +1,7 @@
 /.wordpress-org
-/.build
 /.git
 /.github
+/build
 /node_modules
 
 .editorconfig
