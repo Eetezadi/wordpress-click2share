@@ -3,11 +3,11 @@
 	"apiVersion": 3,
 	"name": "eetezadi/click2share",
 	"icon": "testimonial",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"title": "Click 2 Share",
 	"category": "widgets",
 	"description": "Gutenberg Block Plugin to display a shareable post on Social Media like Meta Threads.",
-	"keywords": [ "Threads", "Tweet", "click2share", "social media" ],
+	"keywords": [ "social share", "Tweet", "click2share", "social media", "threads" ],
 	"example": {},
 	"supports": {
 		"html": false

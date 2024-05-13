@@ -1,10 +1,10 @@
 === Click 2 Share ===
 Contributors: sinaee
-Tags: threads, tweet, meta, twitter
+Tags: threads, twitter, tweet, click to tweet, social share
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 6.5
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 License: GPL-2.0-or-later
 
 Gutenberg Block that displays a one-click shareable post for Social Media like Meta Threads.
@@ -62,6 +62,9 @@ For support or to report an issue, visit the [GitHub repository](https://github.
 1. Overview of settings page with default settings.
 
 == Changelog ==
+
+= 1.1.5 =
+* Cosmetic improvements for Wordpress plugin directory
 
 = 1.1.4 = 
 * Updates of dir structure and assets for publishing on Plugin directory.
