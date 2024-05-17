@@ -4,7 +4,7 @@ Tags: threads, twitter, tweet, click to tweet, social share
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 6.5
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPL-2.0-or-later
 
 Gutenberg Block that displays a one-click shareable post for Social Media like Meta Threads.
