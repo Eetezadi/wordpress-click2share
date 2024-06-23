@@ -2,10 +2,10 @@
 
 /**
  * Plugin Name:       Click 2 Share
- * Description:       Gutenberg Block that displays a one-click shareable post for Social Media like Meta Threads.
- * Requires at least: 6.1 
+ * Description:       Gutenberg Block Plugin to display a shareable post on Meta Threads, X (formely Twitter) or Reddit.
+ * Requires at least: 5.0 
  * Requires PHP:      7.0
- * Version:           1.1.6
+ * Version:           1.2.0
  * Author:            Sina Eetezadi
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -28,7 +28,8 @@ if (!defined('ABSPATH')) {
 
 // Set Defaults on Activation
 function c2sh_set_default_options() {
-    add_option('c2sh_default_linklabel', 'Share to Threads!');
+    add_option('c2sh_default_socialnetwork', 'threads');
+    add_option('c2sh_default_linklabel', 'Click to Share!');
     add_option('c2sh_default_username', '');
     add_option('c2sh_default_style', 'light');
 }
@@ -43,11 +44,16 @@ function click2share_block_init()
     // Loads block.json
     $block_config = json_decode(file_get_contents(__DIR__ . '/build/block.json'), true);
 
-    // Retrieve defaults from WP settings
-    $default_linklabel = get_option('c2sh_default_linklabel'); // Label for share link. Default: "Share 2 Threads"
+    // Retrieve defaults from WP settings, where defaults are set in the validate functions
+    $default_socialnetwork = get_option('c2sh_default_socialnetwork', 'threads'); // default: threads
+    $default_linklabel = get_option('c2sh_default_linklabel', 'Click to Share!'); // default: "Click to Share!"
     $default_username = get_option('c2sh_default_username', ''); // optional: username to be added
-    $default_style = get_option('c2sh_default_style'); // optional: default style "light"
+    $default_style = get_option('c2sh_default_style', 'light'); // default style "light"
     $defaults = array(
+        'default_socialNetwork' => array(
+            'type' => 'string',
+            'default' => $default_socialnetwork,
+        ),
         'default_linkLabel' => array(
             'type' => 'string',
             'default' => $default_linklabel,
@@ -62,6 +68,7 @@ function click2share_block_init()
         ),
 
     );
+    
     foreach ($defaults as $key => $value) {
         $block_config['attributes'][$key] = $value; // Merge into attributes
     }
@@ -76,6 +83,7 @@ add_action('init', 'click2share_block_init');
 // Remove Defaults after uninstallation
 function c2sh_block_uninstall() {
     // Delete options
+    delete_option('c2sh_default_socialnetwork');
     delete_option('c2sh_default_linklabel');
     delete_option('c2sh_default_username');
     delete_option('c2sh_default_style');

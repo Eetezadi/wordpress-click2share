@@ -17,6 +17,10 @@ $display-font-size: $font-size * 1.2;
 		color: map.get($theme, footer-text);
 		align-self: flex-end;
 	}
+
+	.wp-c2sh-shareicon {
+		fill: map.get($theme, text);
+	}
 }
 
 // Applying themes to blocks
@@ -45,15 +49,14 @@ $display-font-size: $font-size * 1.2;
 }
 
 .wp-c2sh-block-icon {
-	content: "";
+	fill: $link-color;
 	display: inline-block;
-	width: $display-font-size;
-	height: $display-font-size;
-	background-image: url(./assets/meta-threads-logo-icon.png);
-	background-size: cover;
-	margin-right: 8px;
+	width: $font-size;
+	height: $font-size;
+	margin-right: 5px;
 	vertical-align: middle;
 }
+
 
 .wp-c2sh-block-link {
 	color: $link-color;
