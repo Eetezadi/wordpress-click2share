@@ -8,7 +8,6 @@ import { useBlockProps } from '@wordpress/block-editor';
 import Sidebar from './components/sidebar/sidebar';
 import ContentEditor from './components/contenteditor/contenteditor';
 import Counter from './components/counter/counter';
-import ShareIcon from './components/shareicon/shareicon';
 import Sharelink from './components/sharelink/sharelink';
 
 /**
