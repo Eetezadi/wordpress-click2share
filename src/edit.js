@@ -29,10 +29,9 @@ import './editor.scss';
  * @param {string} attributes.pageLink - Link to be shared on Threads. Set in sidepanel or default
  * @param {string} attributes.linkLabel - Label of the link to be shared. Set in sidepanel or default
  * @param {string} attributes.userName - Threads username get added as "via @username". Set in sidepanel or default
+ * @param {string} attributes.socialNetwork - Social network for this block. Currently either Threads, X or Reddit.
  * @param {string} attributes.shareString - String ready to be shared to the Threads API
  * @param {string} attributes.theme - Theme string, either "light" or "dark". Set in sidepanel or default
- * @param {string} attributes.backgroundColor - Background color attribute set in sidepanel
- * @param {string} attributes.textColor - Text color attribute set in sidepanel
  * @param {Function} setAttributes - Function to set attributes.
  * @return {JSX.Element} Elements to render
  */
@@ -61,10 +60,9 @@ export default function Edit( { attributes, setAttributes } ) {
 		pageLink,
 		linkLabel,
 		userName,
+		socialNetwork,
 		shareString,
 		theme,
-		backgroundColor,
-		textColor,
 	} = attributes;
 
 	// Initialize pageLink if not defined on block init
@@ -75,9 +73,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	}
 
 	// Set BlockProps
-	const blockProps = useBlockProps( {
-		style: { backgroundColor },
-	} );
+	const blockProps = useBlockProps();
 
 	/**
 	 * Initialize className from Styles
@@ -100,23 +96,25 @@ export default function Edit( { attributes, setAttributes } ) {
 				linkLabel={ linkLabel }
 				pageLink={ pageLink }
 				userName={ userName }
-				textColor={ textColor }
-				backgroundColor={ backgroundColor }
+				socialNetwork={ socialNetwork }
 				setAttributes={ setAttributes }
 			></Sidebar>
 			<ContentEditor
 				post={ post }
-				textColor={ textColor }
 				setAttributes={ setAttributes }
 			></ContentEditor>
 			<div className="wp-block-eetezadi-click2share-footer">
-				<Counter shareURL={ shareString }></Counter>
+				<Counter
+					shareURL={ shareString }
+					socialNetwork={ socialNetwork }
+				></Counter>
 				<Sharelink
 					post={ post }
 					link={ pageLink }
 					userName={ userName }
 					linkLabel={ linkLabel }
 					shareString={ shareString }
+					socialNetwork={ socialNetwork }
 					setAttributes={ setAttributes }
 				></Sharelink>
 			</div>

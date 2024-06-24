@@ -5,6 +5,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps, RichText } from '@wordpress/block-editor';
+import SocialNetworkIcon from './components/socialnetworkicon/socialnetworkicon';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -17,19 +18,12 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
  * @return {Element} Element to render.
  */
 export default function save( { attributes } ) {
-	const {
-		post,
-		linkLabel,
-		shareString,
-		backgroundColor,
-		textColor,
-		className,
-	} = attributes;
+	const { post, linkLabel, shareString, socialNetwork, className } =
+		attributes;
 
 	// className somewhat of a hack to get the "styles" (s. Edit.js)
 	const blockProps = useBlockProps.save( {
 		className: `${ className } wp-c2sh-block-wrapper`,
-		style: { backgroundColor },
 	} );
 
 	return (
@@ -38,18 +32,15 @@ export default function save( { attributes } ) {
 				tagName="p"
 				value={ post }
 				class="wp-c2sh-block-post"
-				style={ {
-					color: textColor,
-				} }
 			/>
 			<div className="wp-c2sh-block-footer">
-				<span className="wp-c2sh-block-icon"></span>
 				<a
 					className="wp-c2sh-block-link"
 					href={ shareString }
 					target="_blank"
 					rel="noreferrer noopener"
 				>
+					<SocialNetworkIcon socialNetwork={ socialNetwork } />
 					{ linkLabel }
 				</a>
 			</div>

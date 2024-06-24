@@ -19,6 +19,7 @@ if (!defined('ABSPATH')) {
 function c2sh_register_settings()
 {
     // Register settings
+    register_setting('c2sh_settings_group', 'c2sh_default_socialnetwork', 'c2sh_validate_socialnetwork');
     register_setting('c2sh_settings_group', 'c2sh_default_linklabel', 'c2sh_validate_linklabel');
     register_setting('c2sh_settings_group', 'c2sh_default_username', 'c2sh_validate_username');
     register_setting('c2sh_settings_group', 'c2sh_default_style', 'c2sh_validate_style');
@@ -32,6 +33,14 @@ function c2sh_register_settings()
     );
 
     // Add settings fields
+    add_settings_field(
+        'c2sh_default_socialnetwork',
+        __('Default Social Network', 'click-2-share'),
+        'c2sh_default_socialnetwork_callback',
+        'c2t',
+        'c2sh_settings_section'
+    );
+    
     add_settings_field(
         'c2sh_default_linklabel',
         __('Default Share Label', 'click-2-share'),
@@ -64,6 +73,19 @@ function c2sh_settings_section_callback()
     echo '<p>' . esc_html(__('Set the default  settings for new Click 2 Share blocks. Settings for each block can be changed in the Gutenberg sidepanel menu.', 'click-2-share')) . '</p>';
 }
 
+function c2sh_default_socialnetwork_callback()
+{
+    $socialnetwork = get_option('c2sh_default_socialnetwork');
+    ?>
+    <select id="c2sh_default_socialnetwork" name="c2sh_default_socialnetwork">
+        <option value="threads" <?php selected($socialnetwork, 'threads'); ?>>Threads</option>
+        <option value="x" <?php selected($socialnetwork, 'x'); ?>>X</option>
+        <option value="reddit" <?php selected($socialnetwork, 'reddit'); ?>>Reddit</option>
+    </select>
+    <?php
+    echo '<p class="description">' . esc_html(__('Choose the default social network.', 'click-2-share')) . '</p>';
+}
+
 function c2sh_default_linklabel_callback()
 {
     $linklabel = get_option('c2sh_default_linklabel');
@@ -86,7 +108,16 @@ function c2sh_default_style_callback()
             <option value="light"' . selected(esc_attr($style), 'light', false) . '>Light</option>
             <option value="dark"' . selected(esc_attr($style), 'dark', false) . '>Dark</option>
           </select>';
-    echo '<p class="description">' . esc_html(__('Choose between Light and Dark theme.<br> For further CSS customization the main &lt;div&gt; of the block has the class "wp-block-eetezadi-click2share".', 'click-2-share')) . '</p>';
+    echo '<p class="description">' . esc_html(__('Choose between Light and Dark theme.', 'click-2-share')) . '</p>';
+}
+
+function c2sh_validate_socialnetwork($input)
+{
+    $valid_networks = ['threads', 'x', 'reddit'];
+    if (in_array($input, $valid_networks)) {
+        return $input;
+    }
+    return 'threads'; // default value
 }
 
 function c2sh_validate_linklabel($input)
@@ -94,7 +125,6 @@ function c2sh_validate_linklabel($input)
     $input = trim($input);
     $maxchar = 80; // arbitrary what fits in
 
-    // Check valid Instagram username if not empty
     if (empty($input) || strlen($input) > $maxchar) {
         add_settings_error(
             'c2sh_default_linklabel',
@@ -157,7 +187,7 @@ function c2sh_options_page_html()
 
     // Admin page markup
 ?>
-    <div class="wrap">
+    <div class="c2sh-settings">
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
         <form action="options.php" method="post">
             <?php
@@ -173,9 +203,7 @@ function c2sh_options_page_html()
     </div>
     <style>
         .c2sh-footer {
-            margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid #eee;
             font-style: italic;
         }
     </style>

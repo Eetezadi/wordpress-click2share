@@ -4,8 +4,9 @@
  * @param {string} linkLabel - Label for the link to be shared.
  * @param {string} pageLink - Link to be shared on Threads.
  * @param {string} userName - User name added as "via @username"
+ * @param {string} socialNetwork - Social network to be shared to
  * @param {string} textColor - Text color.
- * @param {string} backgroundColor - Background color.
+ * @param {string} SocialNetwork - Background color.
  * @param {Function} setAttributes - Function to set attributes.
  * @return {JSX.Element} Element to render.
  */
@@ -13,16 +14,20 @@
 // Translations
 import { __ } from '@wordpress/i18n';
 
-import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 
-import { TextControl, PanelBody, PanelRow } from '@wordpress/components';
+import {
+	TextControl,
+	PanelBody,
+	PanelRow,
+	SelectControl,
+} from '@wordpress/components';
 
 export default function Sidebar( {
 	linkLabel,
 	pageLink,
 	userName,
-	textColor,
-	backgroundColor,
+	socialNetwork,
 	setAttributes,
 } ) {
 	// Handle changes
@@ -37,11 +42,8 @@ export default function Sidebar( {
 	const onChangeUserName = ( newUserName ) => {
 		setAttributes( { userName: newUserName } );
 	};
-	const onChangeBackgroundColor = ( newBackgroundColor ) => {
-		setAttributes( { backgroundColor: newBackgroundColor } );
-	};
-	const onChangeTextColor = ( newTextColor ) => {
-		setAttributes( { textColor: newTextColor } );
+	const onChangeSocialNetwork = ( newSocialNetwork ) => {
+		setAttributes( { socialNetwork: newSocialNetwork } );
 	};
 
 	return (
@@ -91,32 +93,29 @@ export default function Sidebar( {
 						/>
 					</fieldset>
 				</PanelRow>
+
+				<PanelRow>
+					<fieldset>
+						<SelectControl
+							label={ __(
+								'Select Social Network',
+								'click-2-share'
+							) }
+							value={ socialNetwork }
+							options={ [
+								{ label: 'Threads', value: 'threads' },
+								{ label: 'X', value: 'x' },
+								{ label: 'Reddit', value: 'reddit' },
+							] }
+							onChange={ onChangeSocialNetwork }
+							help={ __(
+								'Choose the social network for sharing.',
+								'click-2-share'
+							) }
+						/>
+					</fieldset>
+				</PanelRow>
 			</PanelBody>
-			{/*
-			
-			!!! Temporary fix until proper implementation of custom colors !!!
-			
-			<PanelBody
-				title={ __( 'Custom Colors', 'click-2-share' ) }
-				initialOpen={ false }
-			>
-				<PanelColorSettings
-					title={ __( 'Color settings', 'click-2-share' ) }
-					initialOpen={ true }
-					colorSettings={ [
-						{
-							value: textColor,
-							onChange: onChangeTextColor,
-							label: __( 'Text color', 'click-2-share' ),
-						},
-						{
-							value: backgroundColor,
-							onChange: onChangeBackgroundColor,
-							label: __( 'Background color', 'click-2-share' ),
-						},
-					] }
-				/>
-			</PanelBody> */}
 		</InspectorControls>
 	);
 }

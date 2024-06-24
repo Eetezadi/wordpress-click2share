@@ -16,6 +16,11 @@ $editor-font-size: $font-size * 1.05;
 	.wp-block-eetezadi-click2share-footer {
 		color: map.get($theme, footer-text);
 	}
+
+	.wp-c2sh-shareicon {
+		fill: map.get($theme, text);
+	}
+
 }
 
 // Applying themes to blocks
@@ -49,4 +54,14 @@ $editor-font-size: $font-size * 1.05;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
+}
+
+// Share Icon Wrapper
+.wp-block-eetezadi-click2share-shareicon {
+	display: inline-flex;
+	width: $font-size;
+	height: $font-size;
+	margin-right: 8px;
+	margin-left: auto;
+
 }
