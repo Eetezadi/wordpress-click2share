@@ -5,7 +5,7 @@
  * Description:       Gutenberg Block Plugin to display a shareable post on Meta Threads, X (formely Twitter) or Reddit.
  * Requires at least: 5.0 
  * Requires PHP:      7.0
- * Version:           1.2.0
+ * Version:           1.3.0
  * Author:            Sina Eetezadi
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -32,13 +32,18 @@ function c2sh_set_default_options() {
     add_option('c2sh_default_linklabel', 'Click to Share!');
     add_option('c2sh_default_username', '');
     add_option('c2sh_default_style', 'light');
+    add_option('c2sh_use_shortlink', 0);    
 }
 register_activation_hook(__FILE__, 'c2sh_set_default_options');
 
-// Plugin Settings
+/** Plugin Settings */
+
+$plugin_basename = plugin_basename(__FILE__); // for passing to settings
+
 // CAVE: needs "npm run build:copy-php" need to be run, in order to be copied from src to build directory (s. package.json)
 include_once(plugin_dir_path(__FILE__) . './c2sh-settings.php');
 
+/** Initialize the Main Block */
 function click2share_block_init()
 {
     // Loads block.json
@@ -49,6 +54,7 @@ function click2share_block_init()
     $default_linklabel = get_option('c2sh_default_linklabel', 'Click to Share!'); // default: "Click to Share!"
     $default_username = get_option('c2sh_default_username', ''); // optional: username to be added
     $default_style = get_option('c2sh_default_style', 'light'); // default style "light"
+    $default_use_shortlink = get_option('c2sh_use_shortlink', 0); // default style 0, dont use
     $defaults = array(
         'default_socialNetwork' => array(
             'type' => 'string',
@@ -66,9 +72,13 @@ function click2share_block_init()
             'type' => 'string',
             'default' => $default_style,
         ),
+        'default_useShortlink' => array(
+            'type' => 'boolean',
+            'default' => $default_use_shortlink,
+        ),
 
     );
-    
+  
     foreach ($defaults as $key => $value) {
         $block_config['attributes'][$key] = $value; // Merge into attributes
     }

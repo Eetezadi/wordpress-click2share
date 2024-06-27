@@ -23,7 +23,7 @@ export default function ContentEditor( { post, textColor, setAttributes } ) {
 			onChange={ onChangePost }
 			value={ post }
 			allowedFormats={ [] }
-			placeholder={ __( 'Write your Threads post…' ) }
+			placeholder={ __( 'Write your post here…' ) }
 			style={ {
 				color: textColor,
 			} }

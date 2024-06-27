@@ -1,6 +1,6 @@
 {
 	"name": "click-2-share",
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"description": "Gutenberg Block Plugin to display a shareable post on Meta Threads, X (formely Twitter) or Reddit.",
 	"author": "Sina Eetezadi",
 	"license": "GPL-2.0-or-later",
