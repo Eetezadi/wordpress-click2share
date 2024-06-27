@@ -4,7 +4,7 @@ Tags: threads, twitter, reddit, x, tweet, click to tweet, social share
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 6.5
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPL-2.0-or-later
 
 Gutenberg Block Plugin to display a shareable post on Meta Threads, X (formely Twitter) or Reddit.
@@ -63,6 +63,10 @@ For support or to report an issue, visit the [GitHub repository](https://github.
 1. Overview of settings page with default settings.
 
 == Changelog ==
+
+= 1.3.0 =
+* Added option to use the WP shortlink instead of permalink. Some WP plugins can transform these shortlinks and enable tracking
+* Cosmetic improvements and bug fixes
 
 = 1.2.0 =
 * X, Reddit and Threads now possible sharing destinations

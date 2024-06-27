@@ -3,12 +3,14 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps } from '@wordpress/block-editor';
+import { useEffect } from '@wordpress/element';
 
 // Custom Components
 import Sidebar from './components/sidebar/sidebar';
 import ContentEditor from './components/contenteditor/contenteditor';
 import Counter from './components/counter/counter';
 import Sharelink from './components/sharelink/sharelink';
+import { initPageLink } from './helpers';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -26,12 +28,13 @@ import './editor.scss';
  *
  * @param {Object} attributes - Attributes of the block from block.json or PHP (_default)
  * @param {string} attributes.post - Text of the Threads post
- * @param {string} attributes.pageLink - Link to be shared on Threads. Set in sidepanel or default
+ * @param {string} attributes.pageLink - Link to be shared on Threads. Set default in Php or later in Sidepanel
  * @param {string} attributes.linkLabel - Label of the link to be shared. Set in sidepanel or default
  * @param {string} attributes.userName - Threads username get added as "via @username". Set in sidepanel or default
  * @param {string} attributes.socialNetwork - Social network for this block. Currently either Threads, X or Reddit.
  * @param {string} attributes.shareString - String ready to be shared to the Threads API
  * @param {string} attributes.theme - Theme string, either "light" or "dark". Set in sidepanel or default
+ * @param {boolean} attributes.useShortlink - Whether to use shortlink
  * @param {Function} setAttributes - Function to set attributes.
  * @return {JSX.Element} Elements to render
  */
@@ -63,14 +66,24 @@ export default function Edit( { attributes, setAttributes } ) {
 		socialNetwork,
 		shareString,
 		theme,
+		useShortlink
 	} = attributes;
 
-	// Initialize pageLink if not defined on block init
-	if ( pageLink === undefined ) {
-		const { select } = wp.data;
-		const defaultPageLink = select( 'core/editor' ).getCurrentPost().link;
-		setAttributes( { pageLink: defaultPageLink } );
-	}
+	/** 
+	 * Initialize pageLink if not defined on block init
+	 * This is done via asynchronous api calls in initPageLink() and useEffect() resolves them
+	 * */
+
+	useEffect(() => {
+		const fetchPageLink = async () => {
+			if (pageLink === undefined) {
+				const defaultPageLink = await initPageLink(useShortlink);
+				setAttributes({ pageLink: defaultPageLink });
+			}
+		};
+
+		fetchPageLink();
+	}, [useShortlink]);
 
 	// Set BlockProps
 	const blockProps = useBlockProps();
@@ -110,7 +123,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				></Counter>
 				<Sharelink
 					post={ post }
-					link={ pageLink }
+					pageLink={ pageLink }
 					userName={ userName }
 					linkLabel={ linkLabel }
 					shareString={ shareString }

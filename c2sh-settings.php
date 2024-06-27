@@ -23,13 +23,15 @@ function c2sh_register_settings()
     register_setting('c2sh_settings_group', 'c2sh_default_linklabel', 'c2sh_validate_linklabel');
     register_setting('c2sh_settings_group', 'c2sh_default_username', 'c2sh_validate_username');
     register_setting('c2sh_settings_group', 'c2sh_default_style', 'c2sh_validate_style');
+    register_setting('c2sh_settings_group', 'c2sh_use_shortlink', 'c2sh_validate_use_shortlink');
+
 
     // Add settings section
     add_settings_section(
         'c2sh_settings_section',
         __('Click 2 Share Default Settings', 'click-2-share'),
         'c2sh_settings_section_callback',
-        'c2t'
+        'c2sh'
     );
 
     // Add settings fields
@@ -37,7 +39,7 @@ function c2sh_register_settings()
         'c2sh_default_socialnetwork',
         __('Default Social Network', 'click-2-share'),
         'c2sh_default_socialnetwork_callback',
-        'c2t',
+        'c2sh',
         'c2sh_settings_section'
     );
     
@@ -45,7 +47,7 @@ function c2sh_register_settings()
         'c2sh_default_linklabel',
         __('Default Share Label', 'click-2-share'),
         'c2sh_default_linklabel_callback',
-        'c2t',
+        'c2sh',
         'c2sh_settings_section'
     );
 
@@ -53,7 +55,7 @@ function c2sh_register_settings()
         'c2sh_default_username',
         __('Default Threads Username', 'click-2-share'),
         'c2sh_default_username_callback',
-        'c2t',
+        'c2sh',
         'c2sh_settings_section'
     );
 
@@ -61,13 +63,22 @@ function c2sh_register_settings()
         'c2sh_default_style',
         __('Default Theme', 'click-2-share'),
         'c2sh_default_style_callback',
-        'c2t',
+        'c2sh',
         'c2sh_settings_section'
     );
+
+    add_settings_field(
+        'c2sh_use_shortlink',
+        __('Use Shortlink', 'click-2-share'),
+        'c2sh_use_shortlink_callback',
+        'c2sh',
+        'c2sh_settings_section'
+    );
+    
 }
 add_action('admin_init', 'c2sh_register_settings');
 
-// Settings section callback
+/** Settings Creation callbacks */
 function c2sh_settings_section_callback()
 {
     echo '<p>' . esc_html(__('Set the default  settings for new Click 2 Share blocks. Settings for each block can be changed in the Gutenberg sidepanel menu.', 'click-2-share')) . '</p>';
@@ -110,6 +121,16 @@ function c2sh_default_style_callback()
           </select>';
     echo '<p class="description">' . esc_html(__('Choose between Light and Dark theme.', 'click-2-share')) . '</p>';
 }
+
+function c2sh_use_shortlink_callback()
+{
+    $use_shortlink = get_option('c2sh_use_shortlink');
+    echo '<input type="checkbox" id="c2sh_use_shortlink" name="c2sh_use_shortlink" value="1" ' . checked(1, $use_shortlink, false) . '/>';
+    echo '<p class="description">' . esc_html(__('Use the shortlink Wordpress creates. If you install other plugins such as "Hum" it will use their shortlink.', 'click-2-share')) . '</p>';
+}
+
+
+/** Settings Validation */
 
 function c2sh_validate_socialnetwork($input)
 {
@@ -162,6 +183,11 @@ function c2sh_validate_style($input)
     return 'light'; // default value
 }
 
+function c2sh_validate_use_shortlink($input)
+{
+    return $input ? 1 : 0;
+}
+
 
 // Add the submenu page under the Settings menu
 function c2sh_add_options_page()
@@ -192,7 +218,7 @@ function c2sh_options_page_html()
         <form action="options.php" method="post">
             <?php
             settings_fields('c2sh_settings_group');
-            do_settings_sections('c2t');
+            do_settings_sections('c2sh');
             submit_button('Save');
             ?>
         </form>
@@ -208,4 +234,14 @@ function c2sh_options_page_html()
         }
     </style>
 <?php
+}
+
+// Hook to add a settings link to the plugin overview
+// $plugin_basename needs to be set in main plugin file
+add_filter('plugin_action_links_' . $plugin_basename, 'c2sh_add_settings_link');
+
+function c2sh_add_settings_link($links) {
+    $settings_link = '<a href="' . esc_url(admin_url('options-general.php?page=c2sh-settings')) . '">Settings</a>';
+    array_push($links, $settings_link);
+    return $links;
 }

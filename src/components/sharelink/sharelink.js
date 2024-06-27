@@ -2,7 +2,7 @@
  * Create the link to be shared to the Threads API
  *
  * @param {string} post - Post content.
- * @param {string} link - Link URL. Set in sidepanel or default.
+ * @param {string} pageLink - Link URL. Set in sidepanel or default.
  * @param {string} userName - User name added as "via @username"
  * @param {string} socialNetwork - Social network to be shared to
  * @param {string} linkLabel - Link label. Set in sidepanel or defaul
@@ -19,7 +19,7 @@ import SocialNetworkIcon from '../socialnetworkicon/socialnetworkicon';
 
 export default function Sharelink( {
 	post,
-	link,
+	pageLink,
 	userName,
 	socialNetwork,
 	linkLabel,
@@ -35,7 +35,7 @@ export default function Sharelink( {
 
 	// Text styling
 	post = post.trim();
-	link = link ? ' ' + link : '';
+	const link = pageLink ? ' ' + pageLink : '';
 	userName = userName ? ' by @' + userName : '';
 
 	const encodedText = encodeURIComponent( post + link + userName );
