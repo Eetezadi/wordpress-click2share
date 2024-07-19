@@ -4,8 +4,11 @@
  * Click 2 Share Plugin Settings Page
  *
  * Implements settings page using WordPress Settings API. It includes:
+ * - Default Social Network: Threads, Reddit, X
+ * - Default Link Label to Share
  * - Default Threads Username: Validates and stores a username.
  * - Default Style: Allows selection between 'light' and 'dark' themes.
+ * - Use of Shortlink Checkbox
  *
  * @package Click2Share
  */
@@ -126,7 +129,7 @@ function c2sh_use_shortlink_callback()
 {
     $use_shortlink = get_option('c2sh_use_shortlink');
     echo '<input type="checkbox" id="c2sh_use_shortlink" name="c2sh_use_shortlink" value="1" ' . checked(1, $use_shortlink, false) . '/>';
-    echo '<p class="description">' . esc_html(__('Use the shortlink Wordpress creates. If you install other plugins such as "Hum" it will use their shortlink.', 'click-2-share')) . '</p>';
+    echo '<p class="description">' . esc_html(__('Use the Wordpress short Link instead of the full link.', 'click-2-share')) . '</p>';
 }
 
 
