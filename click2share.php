@@ -5,7 +5,7 @@
  * Description:       Gutenberg Block Plugin to display a shareable post on Meta Threads, X (formely Twitter) or Reddit.
  * Requires at least: 5.0 
  * Requires PHP:      7.0
- * Version:           1.3.0
+ * Version:           1.3.1
  * Author:            Sina Eetezadi
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -40,8 +40,10 @@ register_activation_hook(__FILE__, 'c2sh_set_default_options');
 
 $plugin_basename = plugin_basename(__FILE__); // for passing to settings
 
-// CAVE: needs "npm run build:copy-php" need to be run, in order to be copied from src to build directory (s. package.json)
+// CAVE: USE build_plugin_zip.sh to properly copy into build
 include_once(plugin_dir_path(__FILE__) . './c2sh-settings.php');
+include_once(plugin_dir_path(__FILE__) . './c2sh-api_endpoints.php');
+
 
 /** Initialize the Main Block */
 function click2share_block_init()

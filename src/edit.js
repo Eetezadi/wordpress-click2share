@@ -66,24 +66,24 @@ export default function Edit( { attributes, setAttributes } ) {
 		socialNetwork,
 		shareString,
 		theme,
-		useShortlink
+		useShortlink,
 	} = attributes;
 
-	/** 
+	/**
 	 * Initialize pageLink if not defined on block init
 	 * This is done via asynchronous api calls in initPageLink() and useEffect() resolves them
-	 * */
+	 */
 
-	useEffect(() => {
+	useEffect( () => {
 		const fetchPageLink = async () => {
-			if (pageLink === undefined) {
-				const defaultPageLink = await initPageLink(useShortlink);
-				setAttributes({ pageLink: defaultPageLink });
+			if ( pageLink === undefined ) {
+				const defaultPageLink = await initPageLink( useShortlink );
+				setAttributes( { pageLink: defaultPageLink } );
 			}
 		};
 
 		fetchPageLink();
-	}, [useShortlink]);
+	}, [ pageLink, useShortlink, setAttributes ] );
 
 	// Set BlockProps
 	const blockProps = useBlockProps();
