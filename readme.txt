@@ -1,6 +1,6 @@
 === Click 2 Share ===
 Contributors: sinaee
-Tags: threads, twitter, reddit, x, tweet, click to tweet, social share
+Tags: threads, twitter, reddit, x, tweet
 Requires at least: 5.0
 Requires PHP: 7.0
 Tested up to: 6.5
