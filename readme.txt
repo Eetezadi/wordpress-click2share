@@ -67,7 +67,7 @@ For support or to report an issue, visit the [GitHub repository](https://github.
 = 1.3.2 =
 * Compatibility requires now 6.6 or higher. Not exactly sure why...
 * Finalized unit tests
-* As a result quite some refatoring and bug fixes
+* As a result quite some refactoring and bug fixes
 
 = 1.3.1 =
 * Fixed shortlink implementation via WP REST API
