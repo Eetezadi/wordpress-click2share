@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Content Editor Component Matches the Snapshot 1`] = `
+<DocumentFragment>
+  <p
+    aria-label="Write your post here…"
+    aria-multiline="true"
+    aria-readonly="false"
+    class="block-editor-rich-text__editable rich-text"
+    contenteditable="true"
+    role="textbox"
+    style="white-space: pre-wrap; min-width: 1px;"
+  >
+    I want to share this on Social Media!
+  </p>
+</DocumentFragment>
+`;

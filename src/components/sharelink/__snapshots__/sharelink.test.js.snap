@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sharelink Component Sharelink for reddit renders according to snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="components-external-link wp-block-eetezadi-click2share-sharelink reddit"
+    href="https://www.reddit.com/submit?title=Hi%20there%2C%20I%20test%20my%20first%20Link...%20https%3A%2F%2Fexample.com%2Fblog%2Ftest-page%20by%20%40testuser"
+    rel="external noreferrer noopener"
+    role="link"
+    target="_blank"
+  >
+    <span
+      class="components-external-link__contents"
+    >
+      <svg
+        aria-label="reddit"
+        class="wp-c2sh-block-icon"
+        viewBox="0 0 20.805 20.805"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M19.522 7.196c-1.062-1.064-2.775-1.077-3.896-.069-1.305-.627-2.815-1.026-4.437-1.121.6-1.862 1.834-4.465 3.077-4.715.418-.083.874.137 1.353.657-.035.138-.061.28-.061.427a1.67 1.67 0 0 0 3.338 0c0-.921-.748-1.667-1.669-1.667-.3 0-.581.086-.825.226-.758-.753-1.558-1.055-2.386-.89-2.417.487-3.88 5.023-4.157 5.955-1.707.077-3.296.486-4.657 1.147-1.119-1.031-2.849-1.022-3.92.049C.227 8.25.207 9.942 1.189 11.064a5.787 5.787 0 0 0-.498 2.324c0 4.089 4.371 7.417 9.744 7.417s9.746-3.327 9.746-7.417c0-.831-.189-1.628-.522-2.375.938-1.12.902-2.778-.137-3.817zm-17.791.449c.775-.776 1.999-.827 2.867-.178-1.344.769-2.422 1.79-3.101 2.977-.593-.864-.52-2.046.234-2.799zm8.704 11.886c-4.673 0-8.473-2.755-8.473-6.143 0-3.385 3.8-6.142 8.473-6.142 4.674 0 8.474 2.757 8.474 6.142 0 3.39-3.8 6.143-8.474 6.143zm5.799-12.085c.868-.627 2.071-.567 2.838.2.742.74.825 1.891.27 2.749-.686-1.178-1.764-2.19-3.108-2.949zm-9.348 5.838a1.59 1.59 0 1 1 0-3.178 1.59 1.59 0 0 1 0 3.178zm8.674-1.59a1.59 1.59 0 1 1-3.178 0 1.59 1.59 0 0 1 3.178 0zm-1.338 4.218a.634.634 0 0 1-.112.893c-1.326 1.028-2.614 1.375-3.742 1.375-2.255 0-3.874-1.378-3.898-1.4a.636.636 0 0 1 .833-.959c.118.101 2.884 2.42 6.027-.02a.636.636 0 0 1 .892.111z"
+        />
+      </svg>
+      Share it!
+    </span>
+    <span
+      aria-label="(opens in a new tab)"
+      class="components-external-link__icon"
+    >
+      ↗
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Sharelink Component Sharelink for threads renders according to snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="components-external-link wp-block-eetezadi-click2share-sharelink threads"
+    href="https://threads.net/intent/post?text=Hi%20there%2C%20I%20test%20my%20first%20Link...%20https%3A%2F%2Fexample.com%2Fblog%2Ftest-page%20by%20%40testuser"
+    rel="external noreferrer noopener"
+    role="link"
+    target="_blank"
+  >
+    <span
+      class="components-external-link__contents"
+    >
+      <svg
+        aria-label="threads"
+        class="wp-c2sh-block-icon"
+        viewBox="0 0 878 1000"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M446.7 1000h-.3c-149.2-1-263.9-50.2-341-146.2C36.9 768.3 1.5 649.4.3 500.4v-.7c1.2-149.1 36.6-267.9 105.2-353.4C182.5 50.2 297.3 1 446.4 0h.6c114.4.8 210.1 30.2 284.4 87.4 69.9 53.8 119.1 130.4 146.2 227.8l-85 23.7c-46-165-162.4-249.3-346-250.6-121.2.9-212.9 39-272.5 113.2C118.4 271 89.6 371.4 88.5 500c1.1 128.6 29.9 229 85.7 298.5 59.6 74.3 151.3 112.4 272.5 113.2 109.3-.8 181.6-26.3 241.7-85.2 68.6-67.2 67.4-149.7 45.4-199.9-12.9-29.6-36.4-54.2-68.1-72.9-8 56.3-25.9 101.9-53.5 136.3-36.9 45.9-89.2 71-155.4 74.6-50.1 2.7-98.4-9.1-135.8-33.4-44.3-28.7-70.2-72.5-73-123.5-2.7-49.6 17-95.2 55.4-128.4 36.7-31.7 88.3-50.3 149.3-53.8 44.9-2.5 87-.5 125.8 5.9-5.2-30.9-15.6-55.5-31.2-73.2-21.4-24.4-54.5-36.8-98.3-37.1h-1.2c-35.2 0-83 9.7-113.4 55L261.2 327c40.8-60.6 107-94 186.6-94h1.8c133.1.8 212.4 82.3 220.3 224.5 4.5 1.9 9 3.9 13.4 5.9 62.1 29.2 107.5 73.4 131.4 127.9 33.2 75.9 36.3 199.6-64.5 298.3C673.1 965 579.6 999.1 447 1000h-.3zm41.8-487.1c-10.1 0-20.3.3-30.8.9-76.5 4.3-124.2 39.4-121.5 89.3 2.8 52.3 60.5 76.6 116 73.6 51-2.7 117.4-22.6 128.6-154.6-28.2-6.1-59.1-9.2-92.3-9.2z"
+        />
+      </svg>
+      Share it!
+    </span>
+    <span
+      aria-label="(opens in a new tab)"
+      class="components-external-link__icon"
+    >
+      ↗
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Sharelink Component Sharelink for x renders according to snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="components-external-link wp-block-eetezadi-click2share-sharelink x"
+    href="https://x.com/intent/tweet?text=Hi%20there%2C%20I%20test%20my%20first%20Link...%20https%3A%2F%2Fexample.com%2Fblog%2Ftest-page%20by%20%40testuser"
+    rel="external noreferrer noopener"
+    role="link"
+    target="_blank"
+  >
+    <span
+      class="components-external-link__contents"
+    >
+      <svg
+        aria-label="x"
+        class="wp-c2sh-block-icon"
+        viewBox="0 0 300 271"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M236 0h46L181 115l118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123L-1.1 0h94.9l65.5 86.6zm-16.1 244h25.5L80.4 26H53z"
+        />
+      </svg>
+      Share it!
+    </span>
+    <span
+      aria-label="(opens in a new tab)"
+      class="components-external-link__icon"
+    >
+      ↗
+    </span>
+  </a>
+</DocumentFragment>
+`;

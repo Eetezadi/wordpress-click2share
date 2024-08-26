@@ -26,6 +26,11 @@ export default function Sharelink( {
 	shareString,
 	setAttributes,
 } ) {
+	// Dont render on early calls
+	if ( ! socialNetwork ) {
+		return null;
+	}
+
 	// API Setup
 	const apiLinks = {
 		threads: 'https://threads.net/intent/post?text=',
@@ -47,6 +52,7 @@ export default function Sharelink( {
 		<ExternalLink
 			className={ `wp-block-eetezadi-click2share-sharelink ${ socialNetwork }` }
 			href={ shareString }
+			role="link"
 		>
 			<SocialNetworkIcon socialNetwork={ socialNetwork } />
 			{ linkLabel }

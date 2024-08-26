@@ -1,10 +1,10 @@
 === Click 2 Share ===
 Contributors: sinaee
-Tags: threads, twitter, reddit, x, tweet
-Requires at least: 5.0
-Requires PHP: 7.0
-Tested up to: 6.5
-Stable tag: 1.3.1
+Tags: threads, twitter, reddit, x, tweet, click to tweet, social share
+Requires at least: 6.6
+Requires PHP: 8.0
+Tested up to: 6.6
+Stable tag: 1.3.2
 License: GPL-2.0-or-later
 
 Gutenberg Block Plugin to display a shareable post on Meta Threads, X (formely Twitter) or Reddit.
@@ -63,6 +63,11 @@ For support or to report an issue, visit the [GitHub repository](https://github.
 1. Overview of settings page with default settings.
 
 == Changelog ==
+
+= 1.3.2 =
+* Compatibility requires now 6.6 or higher. Not exactly sure why...
+* Finalized unit tests
+* As a result quite some refatoring and bug fixes
 
 = 1.3.1 =
 * Fixed shortlink implementation via WP REST API
