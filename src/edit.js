@@ -4,13 +4,13 @@
  */
 import { useBlockProps } from '@wordpress/block-editor';
 import { useEffect } from '@wordpress/element';
+import { fetchSettings, applyDefaultAttributes } from './helpers';
 
 // Custom Components
 import Sidebar from './components/sidebar/sidebar';
 import ContentEditor from './components/contenteditor/contenteditor';
 import Counter from './components/counter/counter';
 import Sharelink from './components/sharelink/sharelink';
-import { initPageLink } from './helpers';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -39,23 +39,8 @@ import './editor.scss';
  * @return {JSX.Element} Elements to render
  */
 export default function Edit( { attributes, setAttributes } ) {
-	/*
-	 * Hydrates the attributes with default values from settings
-	 * Value default_Username (from PHP) => userName (block.json)
-	 *
-	 */
-	Object.keys( attributes ).forEach( ( key ) => {
-		if ( key.startsWith( 'default_' ) ) {
-			const attributeKey = key.replace( 'default_', '' );
-			// Ensure attributeKey is not already set or is empty
-			if (
-				! attributes[ attributeKey ] ||
-				attributes[ attributeKey ] === ''
-			) {
-				setAttributes( { [ attributeKey ]: attributes[ key ] } );
-			}
-		}
-	} );
+	// Set BlockProps
+	const blockProps = useBlockProps();
 
 	// Initialize all attributes
 	const {
@@ -66,33 +51,32 @@ export default function Edit( { attributes, setAttributes } ) {
 		socialNetwork,
 		shareString,
 		theme,
-		useShortlink,
 	} = attributes;
 
-	/**
-	 * Initialize pageLink if not defined on block init
-	 * This is done via asynchronous api calls in initPageLink() and useEffect() resolves them
+	/*
+	 *  - Hydrates the attributes with default values from settings
+	 *  - Set the pageLink via API calls to use WP functions
 	 */
-
 	useEffect( () => {
-		const fetchPageLink = async () => {
-			if ( pageLink === undefined ) {
-				const defaultPageLink = await initPageLink( useShortlink );
-				setAttributes( { pageLink: defaultPageLink } );
+		const initializeBlock = async () => {
+			const settings = await fetchSettings(); // helper function
+
+			if ( settings ) {
+				await applyDefaultAttributes(
+					attributes,
+					setAttributes,
+					settings
+				);
 			}
 		};
-
-		fetchPageLink();
-	}, [ pageLink, useShortlink, setAttributes ] );
-
-	// Set BlockProps
-	const blockProps = useBlockProps();
+		initializeBlock();
+	}, [] ); // ignore linter, array needs to be empty
 
 	/**
 	 * Initialize className from Styles
 	 * Somewhat of a hack can be be probably solved better:
 	 * The "styles" in the block.json adds class "is-style-xxx" to the block internally, but not in blockProps
-	 * On block init "className" is undefined, so it gets filled with theme (from WP settings default_theme via PHP)
+	 * On block init "className" is undefined, so it gets filled with theme (from WP settings => default_theme)
 	 * Then this somehow gets properly added to the list of classes of the block
 	 *
 	 * @param {string} blockProps.classname - all classes supplied to the block
@@ -118,7 +102,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			></ContentEditor>
 			<div className="wp-block-eetezadi-click2share-footer">
 				<Counter
-					shareURL={ shareString }
+					shareString={ shareString }
 					socialNetwork={ socialNetwork }
 				></Counter>
 				<Sharelink

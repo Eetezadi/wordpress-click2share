@@ -8,7 +8,7 @@
 // CSS Styles
 import './socialnetworkicon.scss';
 
-export default function SocialNetworkIcon( { socialNetwork = 'threads' } ) {
+export default function SocialNetworkIcon( { socialNetwork } ) {
 	const socialIcons = {
 		threads: {
 			svgViewbox: '0 0 878 1000',
@@ -27,14 +27,23 @@ export default function SocialNetworkIcon( { socialNetwork = 'threads' } ) {
 		},
 	};
 
+	// If non or invalid is given
+	const fallbackIcon = {
+		svgViewbox: '0 0 24 24',
+		svgPath:
+			'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z', // Placeholder path
+	};
+
+	const icon = socialIcons[ socialNetwork ] || fallbackIcon;
+
 	return (
 		<svg
 			className="wp-c2sh-block-icon"
 			aria-label={ socialNetwork }
-			viewBox={ socialIcons[ socialNetwork ].svgViewbox }
+			viewBox={ icon.svgViewbox }
 			xmlns="http://www.w3.org/2000/svg"
 		>
-			<path d={ socialIcons[ socialNetwork ].svgPath } />
+			<path d={ icon.svgPath } />
 		</svg>
 	);
 }

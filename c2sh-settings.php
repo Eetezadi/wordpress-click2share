@@ -3,6 +3,8 @@
 /**
  * Click 2 Share Plugin Settings Page
  *
+ * Sets the default in the WP options DB
+ * 
  * Implements settings page using WordPress Settings API. It includes:
  * - Default Social Network: Threads, Reddit, X
  * - Default Link Label to Share
@@ -18,16 +20,32 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Function to set defaults, gets called via hook in main file
+function c2sh_set_defaults() {
+    $defaults = array(
+        'default_socialNetwork' => 'threads',
+        'default_linkLabel' => 'Share it!',
+        'default_userName' => '',
+        'default_theme' => 'light',
+        'default_useShortlink' => 0,
+    );
+
+    $options = get_option('c2sh_settings');
+
+    if ($options === false) {
+        update_option('c2sh_settings', $defaults);
+    } else {
+        // Update only missing keys in existing options
+        $options = wp_parse_args($options, $defaults);
+        update_option('c2sh_settings', $options);
+    }
+}
+
 // Register settings, sections, and fields
 function c2sh_register_settings()
 {
     // Register settings
-    register_setting('c2sh_settings_group', 'c2sh_default_socialnetwork', 'c2sh_validate_socialnetwork');
-    register_setting('c2sh_settings_group', 'c2sh_default_linklabel', 'c2sh_validate_linklabel');
-    register_setting('c2sh_settings_group', 'c2sh_default_username', 'c2sh_validate_username');
-    register_setting('c2sh_settings_group', 'c2sh_default_style', 'c2sh_validate_style');
-    register_setting('c2sh_settings_group', 'c2sh_use_shortlink', 'c2sh_validate_use_shortlink');
-
+    register_setting('c2sh_settings_group', 'c2sh_settings', 'c2sh_validate_settings');
 
     // Add settings section
     add_settings_section(
@@ -39,7 +57,7 @@ function c2sh_register_settings()
 
     // Add settings fields
     add_settings_field(
-        'c2sh_default_socialnetwork',
+        'default_socialNetwork',
         __('Default Social Network', 'click-2-share'),
         'c2sh_default_socialnetwork_callback',
         'c2sh',
@@ -47,7 +65,7 @@ function c2sh_register_settings()
     );
     
     add_settings_field(
-        'c2sh_default_linklabel',
+        'default_linkLabel',
         __('Default Share Label', 'click-2-share'),
         'c2sh_default_linklabel_callback',
         'c2sh',
@@ -55,7 +73,7 @@ function c2sh_register_settings()
     );
 
     add_settings_field(
-        'c2sh_default_username',
+        'default_userName',
         __('Default Threads Username', 'click-2-share'),
         'c2sh_default_username_callback',
         'c2sh',
@@ -63,15 +81,15 @@ function c2sh_register_settings()
     );
 
     add_settings_field(
-        'c2sh_default_style',
+        'default_theme',
         __('Default Theme', 'click-2-share'),
-        'c2sh_default_style_callback',
+        'c2sh_default_theme_callback',
         'c2sh',
         'c2sh_settings_section'
     );
 
     add_settings_field(
-        'c2sh_use_shortlink',
+        'useShortLink',
         __('Use Shortlink', 'click-2-share'),
         'c2sh_use_shortlink_callback',
         'c2sh',
@@ -89,9 +107,10 @@ function c2sh_settings_section_callback()
 
 function c2sh_default_socialnetwork_callback()
 {
-    $socialnetwork = get_option('c2sh_default_socialnetwork');
+    $options = get_option('c2sh_settings');
+    $socialnetwork = $options['default_socialNetwork'] ?? 'threads'; // Default
     ?>
-    <select id="c2sh_default_socialnetwork" name="c2sh_default_socialnetwork">
+    <select id="default_socialnetwork" name="c2sh_settings[default_socialNetwork]">
         <option value="threads" <?php selected($socialnetwork, 'threads'); ?>>Threads</option>
         <option value="x" <?php selected($socialnetwork, 'x'); ?>>X</option>
         <option value="reddit" <?php selected($socialnetwork, 'reddit'); ?>>Reddit</option>
@@ -102,95 +121,78 @@ function c2sh_default_socialnetwork_callback()
 
 function c2sh_default_linklabel_callback()
 {
-    $linklabel = get_option('c2sh_default_linklabel');
-    echo '<input type="text" id="c2sh_default_linklabel" name="c2sh_default_linklabel" value="' . esc_attr($linklabel) . '"/>';
+    $options = get_option('c2sh_settings');
+    $linklabel = $options['default_linkLabel'] ?? 'Share it!'; // Default
+    echo '<input type="text" id="default_linklabel" name="c2sh_settings[default_linkLabel]" value="' . esc_attr($linklabel) . '"/>';
     echo '<p class="description">' . esc_html(__('Enter the default caption for the share label', 'click-2-share')) . '</p>';
 }
 
 function c2sh_default_username_callback()
 {
-    $username = get_option('c2sh_default_username');
-    echo '<input type="text" id="c2sh_default_username" name="c2sh_default_username" value="' . esc_attr($username) . '"/>';
+    $options = get_option('c2sh_settings');
+    $username = $options['default_userName'] ?? ''; // Default
+    echo '<input type="text" id="default_username" name="c2sh_settings[default_userName]" value="' . esc_attr($username) . '"/>';
     echo '<p class="description">' . esc_html(__('Enter the default Threads username for new blocks (without @).', 'click-2-share')) . '</p>';
 }
 
 
-function c2sh_default_style_callback()
+function c2sh_default_theme_callback()
 {
-    $style = get_option('c2sh_default_style');
-    echo '<select id="c2sh_default_style" name="c2sh_default_style">
-            <option value="light"' . selected(esc_attr($style), 'light', false) . '>Light</option>
-            <option value="dark"' . selected(esc_attr($style), 'dark', false) . '>Dark</option>
+    $options = get_option('c2sh_settings');
+    $theme = $options['default_theme'] ?? 'light'; // Default
+    echo '<select id="default_theme" name="c2sh_settings[default_theme]">
+            <option value="light"' . selected(esc_attr($theme), 'light', false) . '>Light</option>
+            <option value="dark"' . selected(esc_attr($theme), 'dark', false) . '>Dark</option>
           </select>';
     echo '<p class="description">' . esc_html(__('Choose between Light and Dark theme.', 'click-2-share')) . '</p>';
 }
 
 function c2sh_use_shortlink_callback()
 {
-    $use_shortlink = get_option('c2sh_use_shortlink');
-    echo '<input type="checkbox" id="c2sh_use_shortlink" name="c2sh_use_shortlink" value="1" ' . checked(1, $use_shortlink, false) . '/>';
+    $options = get_option('c2sh_settings');
+    $use_shortlink = $options['default_useShortlink'] ?? 0; // Default
+    echo '<input type="checkbox" id="default_use_shortlink" name="c2sh_settings[default_useShortlink]" value="1" ' . checked(1, $use_shortlink, false) . '/>';
     echo '<p class="description">' . esc_html(__('Use the Wordpress short Link instead of the full link.', 'click-2-share')) . '</p>';
 }
 
 
-/** Settings Validation */
+/** 
+ * Settings Validation 
+*/
 
-function c2sh_validate_socialnetwork($input)
+function c2sh_validate_settings($input)
 {
+    $output = [];
+
     $valid_networks = ['threads', 'x', 'reddit'];
-    if (in_array($input, $valid_networks)) {
-        return $input;
-    }
-    return 'threads'; // default value
-}
+    $output['default_socialNetwork'] = in_array($input['default_socialNetwork'], $valid_networks) ? $input['default_socialNetwork'] : 'threads'; // Default
 
-function c2sh_validate_linklabel($input)
-{
-    $input = trim($input);
-    $maxchar = 80; // arbitrary what fits in
-
-    if (empty($input) || strlen($input) > $maxchar) {
+    $linklabel = trim($input['default_linkLabel']);
+    if (empty($linklabel) || strlen($linklabel) > 80) {
         add_settings_error(
-            'c2sh_default_linklabel',
-            'c2sh_default_linklabel_error',
+            'c2sh_settings',
+            'default_linklabel_error',
             __('Invalid Share Label: 1-80 characters', 'click-2-share'),
             'error'
         );
-        $input = substr($input, 0, $maxchar);
+        $linklabel = substr($linklabel, 0, 80);
     }
-    return sanitize_text_field($input);
-}
+    $output['default_linkLabel'] = sanitize_text_field($linklabel);
 
-function c2sh_validate_username($input)
-{
-    $input = trim($input);
-
-    // Check valid Instagram username if not empty
-    if (!empty($input) && !preg_match('/^(?![.])[a-zA-Z0-9._]{1,30}(?<!\.)$/', $input)) {
-        add_settings_error(
-            'c2sh_default_username',
-            'c2sh_default_username_error',
-            __('Invalid Threads Username: 1-30 characters, only letters, numbers, periods, and underscores', 'click-2-share'),
-            'error'
-        );
+    $username = trim($input['default_userName']);
+    if (empty($username) || preg_match('/^(?![.])[a-zA-Z0-9._]{1,30}(?<!\.)$/', $username)) {
+        $output['default_userName'] = sanitize_text_field($username);
+    } else {
+        add_settings_error('c2sh_settings', 'default_username_error', __('Invalid Threads Username: 1-30 characters, only letters, numbers, periods, and underscores', 'click-2-share'), 'error');
     }
-    return sanitize_text_field($input);
-}
 
-function c2sh_validate_style($input)
-{
-    $valid_styles = ['light', 'dark'];
-    if (in_array($input, $valid_styles)) {
-        return $input;
-    }
-    return 'light'; // default value
-}
+    $valid_themes = ['light', 'dark'];
+    $output['default_theme'] = in_array($input['default_theme'], $valid_themes) ? $input['default_theme'] : 'light'; // Default
 
-function c2sh_validate_use_shortlink($input)
-{
-    return $input ? 1 : 0;
-}
+    $output['default_useShortlink'] = isset($input['default_useShortlink']) ? 1 : 0; // Default
 
+    return $output;
+}
 
 // Add the submenu page under the Settings menu
 function c2sh_add_options_page()

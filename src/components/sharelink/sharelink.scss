@@ -3,11 +3,11 @@
 
 // External Link
 .wp-block-eetezadi-click2share-sharelink {
-	color: $link-color;
-	text-decoration: none;
+	color: $link-color !important;
+	text-decoration: none !important;
 	margin-left: auto;
 
 	&:hover {
-		text-decoration: underline;
+		text-decoration: underline !important;
 	}
 }
